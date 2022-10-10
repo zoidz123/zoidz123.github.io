@@ -1,0 +1,82 @@
+site_name: DFlow Docs
+nav:
+  - "DFlow Protocol":
+      - Understanding DFlow: index.md
+      - "Core Concepts":
+          - Order Flow Auction: order-flow-auction.md
+          - Flow Rate: flow-rate.md
+      - "Protocol Design":
+          - DFlow Node: dflow-node.md
+          - Signatory Server: signatory-server.md
+          - Endorsement Server: endorsement-server.md
+          - DFlow Native Bridge: bridge.md
+  - "DFlow Products":
+      - Public Dashboard: public-dashboard.md
+      - Wallet Dashboard: wallet-dashboard.md
+      - Market Maker Dashboard: mm-dashboard.md
+  - "Guides":
+      - Getting Started: getting-started.md
+      - "General":
+          - Understanding Auction Behavior: understanding-auction-behavior.md
+          - Depositing / Withdrawing: depositing-withdrawing.md
+      - "For Order Flow Sources":
+          - Setting Up An Endorsement Server: setting-up-an-endorsement-server.md
+          - Creating Auctions: creating-auctions.md
+          - Fetching Price Quotes: fetching-price-quotes.md
+          - Sending Order Transaction: sending-order-transaction.md
+          - Routing Order Flow: routing-order-flow.md
+      - "For Market Makers":
+          - Submitting Bid: submitting-bid.md
+          - Revealing Bid: reveal-bid.md
+          - Filling Order: fill-order.md
+  - "Helpful Concepts":
+      - Liquidity Models: liquidity-model.md
+      - Payment-for-order-flow: payment-for-order-flow.md
+      - Price Improvement: price-improvement.md
+      - Order Flow Toxicity: order-flow-toxicity.md
+
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - content.code.annotate
+    - content.tabs.link
+  palette:
+    # Palette toggle for light mode
+    - scheme: default
+      primary: indigo
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - scheme: slate
+      primary: indigo
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to light mode
+  logo: logo/dflow-logo.png
+  favicon: logo/dflow-favicon.png
+extra:
+  generator: false
+  social:
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/DFlowProtocol
+
+copyright: Copyright &copy; 2022 DFlow Inc.
+
+markdown_extensions:
+  - tables
+  - admonition
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+# extra_css:
+#   - stylesheets/extra.css
