@@ -1,10 +1,8 @@
 # Creating Auctions
 
-Before routing orders to DFlow, you must have already created order flow auctions on DFlow. Each [order flow auction](order-flow-auction.md) is like a contract and represents a unique grade of order flow, as determined by a set of parameters.
+The first step to selling / routing order flow to DFlow is creating order flow auctions through the DFlow Wallet Dashboard.
 
-You have the flexibility to tranche user orders based on specific wants and needs. Market makers will view auction specs and submit bids in a first-price sealed-bid manner.
-
-The creation of order flow auctions is made intuitive by the DFlow Dashboard, which will be released upon the launch of its decentralized order flow markets.
+Each [order flow auction](order-flow-auction.md) is like a contract and represents a unique grade of order flow, as determined by a set of user-defined parameters. You have the flexibility to tranche user orders based on specific wants and needs. Market makers will view auction specs and submit bids in a first-price sealed-bid manner.
 
 ## DFlow Dashboard
 
@@ -12,4 +10,6 @@ The [DFlow Dashboard](dashboard.md) serves as the hassle-free control center for
 
 ## Deposit USDC
 
-Creating auctions on DFlow requires a one-time flat fee of 1 USDC. This is to reduce network spam.
+Creating auctions on DFlow requires a one-time flat fee of 1 USDC, to reduce network spam.
+
+<!-- Insert short video tutorial / screen recording of someone going through the entire process  -->

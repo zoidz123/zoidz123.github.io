@@ -6,7 +6,7 @@ If you choose to not fill the orders, you will forfeit the bid amount and the re
 
 ## A Fill Order Example
 
-=== "Typescript"
+=== "TypeScript"
 
     ``` ts
     TODO

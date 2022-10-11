@@ -1,35 +1,36 @@
-site_name: DFlow Docs
+site_name: DFlow Documentation
 nav:
-  - "DFlow Protocol":
+  - "🍃 DFlow Protocol":
       - Understanding DFlow: index.md
-      - "Core Concepts":
+      - "🔍 Core Concepts":
           - Order Flow Auction: order-flow-auction.md
           - Flow Rate: flow-rate.md
-      - "Protocol Design":
+      - "📐 Protocol Design":
           - DFlow Node: dflow-node.md
           - Signatory Server: signatory-server.md
           - Endorsement Server: endorsement-server.md
           - DFlow Native Bridge: bridge.md
-  - "DFlow Products":
+  - "🧰 DFlow Products":
       - Public Dashboard: public-dashboard.md
       - Wallet Dashboard: wallet-dashboard.md
       - Market Maker Dashboard: mm-dashboard.md
-  - "Guides":
+  - "🛠️ Guides":
       - Getting Started: getting-started.md
-      - "General":
+      - "🌎 General":
           - Understanding Auction Behavior: understanding-auction-behavior.md
+          - Monitoring Auction Events: monitoring-auction-events.md
           - Depositing / Withdrawing: depositing-withdrawing.md
-      - "For Order Flow Sources":
+      - "📤 For Order Flow Sources":
           - Setting Up An Endorsement Server: setting-up-an-endorsement-server.md
           - Creating Auctions: creating-auctions.md
           - Fetching Price Quotes: fetching-price-quotes.md
           - Sending Order Transaction: sending-order-transaction.md
           - Routing Order Flow: routing-order-flow.md
-      - "For Market Makers":
+      - "💸 For Market Makers":
           - Submitting Bid: submitting-bid.md
           - Revealing Bid: reveal-bid.md
           - Filling Order: fill-order.md
-  - "Helpful Concepts":
+  - "📚 Helpful Concepts":
       - Liquidity Models: liquidity-model.md
       - Payment-for-order-flow: payment-for-order-flow.md
       - Price Improvement: price-improvement.md
@@ -44,22 +45,26 @@ theme:
     - navigation.expand
     - content.code.annotate
     - content.tabs.link
-  palette:
-    # Palette toggle for light mode
-    - scheme: default
-      primary: indigo
-      toggle:
-        icon: material/toggle-switch
-        name: Switch to dark mode
+  # palette:
+  # primary: indigo
+  # accent: indigo
+  # Palette toggle for light mode
+  # - scheme: default
+  #   # primary: indigo
+  #   toggle:
+  #     icon: material/toggle-switch
+  #     name: Switch to dark mode
 
-    # Palette toggle for dark mode
-    - scheme: slate
-      primary: indigo
-      toggle:
-        icon: material/toggle-switch-off-outline
-        name: Switch to light mode
+  # # Palette toggle for dark mode
+  # - scheme: slate
+  #   # primary: indigo
+  #   toggle:
+  #     icon: material/toggle-switch-off-outline
+  #     name: Switch to light mode
   logo: logo/dflow-logo.png
   favicon: logo/dflow-favicon.png
+  font:
+    text: Open Sans
 extra:
   generator: false
   social:
@@ -78,5 +83,9 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.tabbed:
       alternate_style: true
-# extra_css:
-#   - stylesheets/extra.css
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+extra_css:
+  - stylesheets/extra.css

@@ -12,7 +12,7 @@ If you have the highest bid by the end of the Reveal period, you will become the
 
 ## A Reveal Bid Example
 
-=== "Typescript"
+=== "TypeScript"
 
     ``` ts
     TODO

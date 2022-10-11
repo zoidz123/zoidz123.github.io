@@ -43,7 +43,7 @@ After your endorsement server is setup, you can start routing orders to your DFl
 
 DFlow requires you to endorse price quote requests and user order transactions. Request and transactions without a proper endorsement will fail. An endorsement also comes with a preset timestamp, limiting actions to a certain period of time after endorsement.
 
-=== "Typescript"
+=== "TypeScript"
 
     ``` ts
     TODO

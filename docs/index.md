@@ -1,6 +1,6 @@
 # Understanding DFlow
 
-## Introducing: D(ecentralized)Flow
+## DFlow: D*ecentralized* Flow
 
 DFlow is the infrastructure for a novel, open and fair payment-for-order-flow model. The infrastructure allows order flow sources, such as wallets and swappers, to monetize their order flow by creating order flow auctions on DFlow. Market makers will then bid into these auctions to win the right to fill orders.
 

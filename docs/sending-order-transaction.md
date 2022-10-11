@@ -4,7 +4,7 @@ When a user shows intent of submitting an order, you can fetch a Firm Quote by s
 
 On low gas cost chains, you have the option to delegate the market maker as the fee payer for the settlement transaction.
 
-=== "Typescript"
+=== "TypeScript"
 
     ``` ts
     TODO

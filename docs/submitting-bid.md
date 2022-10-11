@@ -20,7 +20,7 @@ There is no limit on the number of auctions you can bid into. If you are taking 
 
 ## A Bidding Example
 
-=== "Typescript"
+=== "TypeScript"
 
     ``` ts
     TODO
