@@ -4,6 +4,10 @@ The DFlow order flow auction is core to DFlow and understanding auction mechanic
 
 DFlow will release an intuitive [DFlow Dashboard](dashboard.md) to let order flow sources easily create auctions.
 
+!!! info "Order Flow Source Examples"
+
+    Order flow sources include on-chain wallets (e.g. MetaMask, Phantom) and aggregators (e.g. 1Inch, Jupiter Aggregator). They are the on-chain versions of traditional brokerages.
+
 ## Overview
 
 DFlow brings transparency and fairness to the PFOF models seen in traditional equities and options markets. By conducting PFOF on the blockchain (vs. using long-term contracts with opaque terms), DFlow allows participants to clearly see the entire trade lifecycle including order flow batching, bidding, and filling. Furthermore, a decentralized PFOF model allows any market maker to participate in bidding, which results in better pricing for users and more competitive payments for sources of order flow.
@@ -26,11 +30,11 @@ A sequential auction model is chosen to enable continuous bidding and delivery o
 
 An auction can have many epochs and it is expected auctions with higher epochs will receive more competitive bids from market makers. Each epoch can be roughly split into three periods:
 
-- Bidding: market makers submit bids into the current epoch of an auction
+- Bid: market makers submit bids into the current epoch of an auction
 - Reveal: market makers reveal bids (remember DFlow auctions are blind auctions)
 - Delivery: order flow source delivers order flow, amount as determined by `Notional`, to winning market maker
 
-In general, epochs roll over (i.e. current epoch ends) to the next epoch based on a percentage of `Notional` or `Generic Delivery Days`, whichever comes first. However, by design, DFlow lets order flow sources define the length of their first epoch (**Genesis Epoch**).
+Epochs roll over (i.e. current epoch ends) to the next epoch based on the behavior of the previous epoch, to ensure a continuous auction bid and delivery process. For more info on the details, see this [section](understanding-auction-behavior.md).
 
 !!! info "Why Reveal Period"
 
@@ -38,11 +42,11 @@ In general, epochs roll over (i.e. current epoch ends) to the next epoch based o
 
 #### Genesis Epoch
 
-Genesis Epoch is the first epoch of an auction. Auction owners define the Bidding and Reveal period of this epoch by setting the `Genesis Epoch Bidding Period`. They can also define the Delivery period by setting the `Genesis Epoch Delivery Period`. The reason behind a different treatment for the Genesis Epoch is to let auction owners prepare for the auction like sourcing bids from market makers and promoting their auctions.
+Genesis Epoch is the first epoch of an auction. Auction owners define the Bid and Reveal period of this epoch by setting the `Genesis Epoch Duration`. They can also define the Delivery period by setting the `Genesis Epoch Delivery Period`. The reason behind a different treatment for the Genesis Epoch is to let auction owners prepare for the auction like sourcing bids from market makers and promoting their auctions.
 
 #### Generic Epoch
 
-All epochs, excluding the first epoch, are classified as Generic Epoch. In this case, a new epoch starts when the Delivery period of the previous epoch starts and this epoch ends when its Delivery period ends (or when `Notional` amount is reached). Having an epoch roll over based on auction `Notional` or `Generic Delivery Period` of the previous epoch support continous auction bidding and order flow delivery.
+All epochs, excluding the first epoch, are classified as Generic Epoch. Generic Epoch Bid and Reveal periods are no longer user-defined and will depend on the previous epoch's Delivery Period. In this case, a new epoch starts when the Delivery period of the previous epoch starts and this epoch ends when its Delivery period ends (or when `Notional` amount is reached).
 
 ## Auction Parameters
 
@@ -52,9 +56,9 @@ Each auction, like a contract, is defined by a set of parameters that determines
 
 DFlow is built as a chain agnostic PFOF infrastructure and will support multiple L1 chains. Initially, DFlow will only support order flow from Solana.
 
-#### Base and Quote Token
+#### Base and Quote Currency
 
-Each auction contains only one token pair. E.g. an auction will have WETH–USDC as the underlying token asset, where WETH is the `Base` token and USDC is the `Quote` token.
+Each auction contains only one token pair. E.g. an auction will have WETH–USDC as the underlying token asset, where WETH is the `Base` currency and USDC is the `Quote` currency.
 
 #### Notional
 
@@ -62,15 +66,15 @@ Each auction contains only one token pair. E.g. an auction will have WETH–USDC
 
 #### Min and Max Range
 
-An auction lets users define the `Min` and `Max` of the underlying token pair of the auction, where `Min` is inclusive and `Max` is exclusive. Orders within this range will be routed to the auction by the wallet or swapper.
+An auction lets users define the `Min` and `Max` of the underlying token pair of the auction, where `Min` is inclusive and `Max` is exclusive. Orders following this range will be routed to the auction by the wallet or swapper.
 
-#### Genesis Epoch Bidding Period
+#### Genesis Epoch Duration
 
-The `Genesis Epoch Bidding Period` can be set in hours or days and marks the end of the Bidding period of the first epoch, also known as the Genesis Epoch. Auctions are structured to run sequentially so note the end of this period also marks the beginning of the second epoch.
+The `Genesis Epoch Duration` can be set in hours or days and marks the end of the Bid + Reveal period of the first epoch, also known as the Genesis Epoch (or Epoch 0). Auctions are structured to run sequentially so note the end of this period also marks the beginning of the second epoch, or Epoch 1.
 
 #### Genesis Epoch Delivery Period
 
-Wallets are allowed to set a `Genesis Epoch Delivery Period` which starts immediately after the `Genesis Epoch Bidding Period` and marks the end of the Delivery period for the first epoch. Sources of order flow must deliver the set `Notional` amount by the end of this period.
+Wallets are allowed to set a `Genesis Epoch Delivery Period` which starts immediately after the `Genesis Epoch Duration` and marks the end of the Delivery period for the first epoch. Sources of order flow must deliver the set `Notional` amount by the end of this period.
 
 #### Generic Delivery Period
 
@@ -82,7 +86,7 @@ Auction owners can choose who pays, either the market maker or their users, for 
 
 #### Backup Liquidity Provider
 
-A `Backup Liquidity Provider` is used in the case when a winning market maker, for whatever reason, goes offline and does not respond to fill requests. We will support various liquidity providers including 0x, 1Inch, Jupiter Aggregator etc.
+As the name infers, the `Backup Liquidity Provider` is used as a backup when a market maker is not filling orders. For example, a winning market maker goes offline and does not respond to fill requests, or the winning market fills 80% of incoming orders and chooses to route remaining orders to the Backup LP. We will support various liquidity providers including 0x, 1Inch, Jupiter Aggregator etc.
 
 ## An Order Flow Auction Example
 
@@ -96,7 +100,7 @@ An order flow source will specify the following parameters, where these paramete
 | `Min`                           | $20                |
 | `Max`                           | $50                |
 | `Notional`                      | $200,000           |
-| `Genesis Epoch Bidding Period`  | 10 days            |
+| `Genesis Epoch Duration`        | 10 days            |
 | `Genesis Epoch Delivery Period` | 5 days             |
 | `Generic Epoch Delivery Period` | 10 minutes         |
 | `Fee Payer`                     | Market Maker       |

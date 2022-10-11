@@ -12,7 +12,7 @@ To display prices to users, order flow sources will need to request price quotes
 
 If the user submits the order (i.e. user signs the crafted transaction from signatory server), the signatory server will conduct proper checks and forward the user's signed transaction to the market maker (who won the auction) to be filled.
 
-### Update DFlow Node
+### Update DFlow Ledger
 
 TODO
 

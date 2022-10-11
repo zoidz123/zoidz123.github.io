@@ -13,7 +13,8 @@ nav:
   - "🧰 DFlow Products":
       - Public Dashboard: public-dashboard.md
       - Wallet Dashboard: wallet-dashboard.md
-      - Market Maker Dashboard: mm-dashboard.md
+      - Tsunami: tsunami.md
+      # - Market Maker Dashboard: mm-dashboard.md
   - "🛠️ Guides":
       - Getting Started: getting-started.md
       - "🌎 General":

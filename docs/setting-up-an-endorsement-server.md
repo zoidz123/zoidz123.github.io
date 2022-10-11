@@ -19,7 +19,7 @@ To complete the endorsement server setup, you will need to generate an endorseme
 
 An endorsement server will be delivered to you as a Docker image, which you can deploy on any server. The endorsement server gives you additional flexibility when it comes to preventing malicious actors from using your endorsement key to spam the network.
 
-=== "Typescript"
+=== "TypeScript"
 
     ``` ts
     TODO

@@ -146,12 +146,12 @@ Auction XYZ will roll over indefinitely until it's cancelled.
 
 1.  This auction structure ensures a continuous delivery of order flow:
 
-    - End of Epoch N-1's Delivery Period == start of Epoch N's Delivery Period
+    - End of `Epoch N-1`'s Delivery Period == start of `Epoch N`'s Delivery Period
 
 2.  Having `Time Factor` and `Notional Factor` ensures market makers have sufficient time to reveal bids, ensuring the winner of next epoch is known in advance:
 
-    - Epoch N's Bid Period ends 70% into Epoch N-1's Delivery Period
+    - `Epoch N`'s Bid Period ends 70% into `Epoch N-1`'s Delivery Period
 
 3.  Epoch rolls over to next efficiently and deterministically
 
-    - Epoch N's Delivery Period is based on both `Notional` and a user defined parameter
+    - `Epoch N`'s Delivery Period is based on both `Notional` and a user defined parameter
