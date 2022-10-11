@@ -23,3 +23,5 @@ Each DFlow node will run a signatory server, an off-chain sidecar that handles p
 ### Endorsement Server
 
 DFlow's application layer payment-for-order-flow model associates user intent with order flow, which improves market pricing of order flow. Every order flow source routing orders to DFlow incorporate intent into order flow by running an endorsement server. An endorsement server endorses certain actions on the DFlow network by attaching an Ed25519 public key to requests and transactions. Endorsing price quote requests and/or create auction transactions guarantees those actions came from the auction source and prevents DFlow network spam.
+
+<!-- Add a diagram -->
