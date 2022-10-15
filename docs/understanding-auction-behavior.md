@@ -18,43 +18,45 @@ An auction is comprised of an indefinite number of epochs. An epoch defines the 
 
 The length is determined by the previous epoch. At any point in time, there will be two active epochs:
 
-- Current epoch will be receiving bids (in Bid Period)
-- Previous epoch will be taking delivery (in Delivery Period)
+- `Epoch N` will be receiving bids (in Bid Period)
+- `Epoch N-1` will be taking delivery (in Delivery Period)
 
-DFlow defines two types of epochs for every auction, where both are quite similar. If you are a market maker, you will be bidding into the latest epoch of an auction.
+DFlow defines two types of epochs that are both quite similar. If you are a market maker, you will be bidding into the latest epoch of an auction.
 
 ### Genesis Epoch
 
-Known as the first epoch of the auction, Epoch 0, or Genesis Epoch. Genesis Epoch is designed to be a preparation period (e.g. announce auction on social media, source market maker bids, prepare order flow routing) and starts as soon as the auction is created. DFlow allows the auction operator to manually define both the `Genesis Epoch Duration` and `Genesis Epoch Duration`.
+Known as the first epoch of the auction, Epoch 0, or Genesis Epoch. Genesis Epoch is designed to be a preparation period (e.g. announce auction on social media, source market maker bids, ensure integration is set up properly) and starts as soon as the auction is created. DFlow allows the auction operator to manually define both the `Genesis Epoch Duration` and `Genesis Epoch Delivery Period`.
 
 #### From Bid to Reveal
 
-Immediately after the auction is created, market makers can start submitting bids into the Genesis Epoch. The entire Bid Period is defined by `Genesis Epoch Duration` multiplied by a time factor (e.g. 70%) and the Reveal Period starts thereafter. No new bids can be submitted during the Reveal Period.
-
-Note the end of the Bid Period of this epoch will start and kickoff the Bid Period of the next epoch, which will be considered a Generic Epoch.
+Immediately after the auction is created, market makers can start submitting bids into the Genesis Epoch. The entire Bid Period is defined by `Genesis Epoch Duration` multiplied by a Time Factor (defined as 70%) and the Reveal Period starts thereafter. No new bids can be submitted during the Reveal Period.
 
 #### From Reveal to Delivery
 
-The Reveal Period will last until the `Genesis Epoch Duration` ends and a winner will be selected.
+The Reveal Period will last until the `Genesis Epoch Duration` ends and a winner will be selected. The start of its Delivery Period will kickoff the start of Epoch 1's Bid Period.
 
 ### Generic Epoch
 
-Any epoch, other than the Genesis Epoch. The major difference here is the Bidding Period of a Generic Epoch is determined by the Delivery Period of the previous epoch. Remember, the auction operator could manually set the `Genesis Epoch Duration` – it's not the case here.
+Any epoch, other than the Genesis Epoch. The major difference here is the Bidding Period of a Generic Epoch is determined by the Delivery Period of the previous epoch.
 
 #### From Bid to Reveal
 
-The Bid Period starts when the Bid Period of the previous epoch ends. The Bid Period of the Generic Epoch will last the length of the previous epoch's Delivery Period, which is determined as the shorter of:
+The Bid Period starts when the previous epoch winner starts taking order flow delivery. The Bid Period of the Generic Epoch will last the length of the previous epoch's Delivery Period, which is determined as the shorter of:
 
-- `Genesis Epoch Delivery Period` if previous is Genesis Epoch or `Generic Epoch Delivery Period` if previous is Generic Epoch, multiplied by a time factor
-- Previous epoch's `Notional` multiplied by a notional factor (e.g. 70%)
+- `Genesis Epoch Delivery Period` if previous is Genesis Epoch or `Generic Epoch Delivery Period` if previous is Generic Epoch, multiplied by a Time Factor
+- Previous epoch's `Notional` multiplied by a Notional Factor (e.g. 70%)
 
-Similar to above, the end of this epoch's Bid Period starts the next epoch's Bid Period.
+Unlike the Genesis Epoch's Bid Period, the Bid Period of the Generic Epoch is determined by not only a time (in hours, days) but also a `Notional Time`. The reason is the epoch should roll over if a specific `Notional Time` is reached before the specified time period ends. Likewise, the epoch should roll over if `Notional Time` is not reached but the specified time period is up.
 
-Unlike the Genesis Epoch's Bid Period, the Bid Period of the Generic Epoch is determined by not only a time (in hours, days) but also a `Notional` amount. The reason is the epoch should roll over if `Notional` is reached before the specified period ends. Likewise, the epoch should roll over if `Notional` is not reached but the specified period is up.
+!!! info "Unix Time vs. Notional Time"
+
+    Auction operators define the maximum length of the Delivery Period when setting `Genesis Epoch Delivery Period` and `Generic Epoch Delivery Period`. These times are defined in Unix time but DFlow also defines another element of time called Notional Time, which is defined as Delivered Notional over Total Notional. Delivering order flow increments the current Notional Time.
 
 #### From Reveal to Delivery
 
 The Reveal Period will last until the end of the previous epoch's Delivery Period. The Delivery Period of this epoch starts thereafter and will determine the Bid + Reveal Period of the next epoch.
+
+[![](https://mermaid.ink/img/pako:eNqNUs1PwjAU_1deSkj8GBcPHBaiAQaoiWjEizIPZX1ljV27dB2IjP_drgxQT_b02t97v4_0bUmiGZKQcKnXSUqNhZcoVuBOuw2F3UiEe-BCyrC1WPCgsEZ_YNji3W5Td9aC2TS8yj-DREttHMZ5rPYc_XmEFk0mlFBLEBwGgsETGqEZiAJ0juodOp1rGJzN7wqwqXukMEGFRQ0bXxqRwCjXSXrzfr6nHdQzVdNWQeSHh6UxqJx_kWFhaZZDD_plYoVWMLM-2RG5PGp4YohKQ33jhW-CMU2sNge5yMu9opOa1EqPte0TVINTXcHtfKqtB4EqBs-4QioPaVNawAKX5WFw0Aw2ASsY-hARSrFCgwwclzPkCHqncia-0Fk83n_bHDaU3ujoj9HhD6Pj_xklAcnc31HB3H5sa5qY2BQzjEnoSoacltLGJFY710pLq2cblZDQmhIDUuaMWowEXRqakZBTWbjXnKo3rU93ZMIleNjvoF_F3Tfns9gl)](https://mermaid.live/edit#pako:eNqNUs1PwjAU_1deSkj8GBcPHBaiAQaoiWjEizIPZX1ljV27dB2IjP_drgxQT_b02t97v4_0bUmiGZKQcKnXSUqNhZcoVuBOuw2F3UiEe-BCyrC1WPCgsEZ_YNji3W5Td9aC2TS8yj-DREttHMZ5rPYc_XmEFk0mlFBLEBwGgsETGqEZiAJ0juodOp1rGJzN7wqwqXukMEGFRQ0bXxqRwCjXSXrzfr6nHdQzVdNWQeSHh6UxqJx_kWFhaZZDD_plYoVWMLM-2RG5PGp4YohKQ33jhW-CMU2sNge5yMu9opOa1EqPte0TVINTXcHtfKqtB4EqBs-4QioPaVNawAKX5WFw0Aw2ASsY-hARSrFCgwwclzPkCHqncia-0Fk83n_bHDaU3ujoj9HhD6Pj_xklAcnc31HB3H5sa5qY2BQzjEnoSoacltLGJFY710pLq2cblZDQmhIDUuaMWowEXRqakZBTWbjXnKo3rU93ZMIleNjvoF_F3Tfns9gl)
 
 ## A Rollover Example
 
@@ -74,7 +76,7 @@ Consider Wallet ABC specced and deployed Auction XYZ below:
 | `Notional`                      | $200,000           |
 | `Genesis Epoch Duration`        | 10 days            |
 | `Genesis Epoch Delivery Period` | 5 days             |
-| `Generic Epoch Delivery Period` | 10 minutes         |
+| `Generic Epoch Delivery Period` | 2 days             |
 | `Fee Payer`                     | Market Maker       |
 | `Backup Liquidity Provider`     | Jupiter Aggregator |
 
@@ -85,11 +87,13 @@ DFlow Protocol hardcodes a set of factors to determine the end of Bid Period / s
 | `Time Factor`      | 70%   |
 | `Notional Factor`  | 70%   |
 
-Auction XYZ's Genesis Epoch have the following Bid, Reveal, and Delivery Periods:
+Auction XYZ's Genesis Epoch have the following Bid, Reveal, and Delivery Period:
 
 - Bid Period: 7 days `(Genesis Epoch Duration * Time Factor) = 10 days * 70%`
 - Reveal Period: 3 days `(Genesis Epoch Duration - Genesis Epoch Bid Period)`
 - Delivery Period: the shorter of 5 days `(Genesis Epoch Delivery Period)` or when $200,000 `(Notional)` is delivered
+
+[![](https://mermaid.ink/img/pako:eNp1klFLwzAQx7_KESgoNKztEKFv24rupSAq6KQvobnOYJOM9DocY9_dm9lQmN5Lkv_d_3dwub1ovUZRirVyRI0DDq0I73ywigBWHLKuZVXJ5TKm1acZzulkJRMrEy2TU5K8VrtahQ8M4LvuJBrqEWK8qL5Hgtl8AW1A7jTAbGzJeAevqzfgI88m-XRSZEUR3YsxBHQEz8ZiCdb0OJB3mMKxROaZzKcyy1LIdOOiY8AIvEeHgxlYifrcaHjAYLyGiygVe7ZMBY1DfgG_1RHxiFtU_d-Usg2GIqBIQXXEM4iw6cldYc89wu7sv7I8TDva6_84018cZt4wR6TCIk_faP61_ZHbCHpHi40o-aqxU2NPjWjcgUvVSP5p51pRUhgxFePm-LuVUeugrCg71Q-sbpR78_7njdqQD3XcjO8FOXwBBuai8A)](https://mermaid.live/edit#pako:eNp1klFLwzAQx7_KESgoNKztEKFv24rupSAq6KQvobnOYJOM9DocY9_dm9lQmN5Lkv_d_3dwub1ovUZRirVyRI0DDq0I73ywigBWHLKuZVXJ5TKm1acZzulkJRMrEy2TU5K8VrtahQ8M4LvuJBrqEWK8qL5Hgtl8AW1A7jTAbGzJeAevqzfgI88m-XRSZEUR3YsxBHQEz8ZiCdb0OJB3mMKxROaZzKcyy1LIdOOiY8AIvEeHgxlYifrcaHjAYLyGiygVe7ZMBY1DfgG_1RHxiFtU_d-Usg2GIqBIQXXEM4iw6cldYc89wu7sv7I8TDva6_84018cZt4wR6TCIk_faP61_ZHbCHpHi40o-aqxU2NPjWjcgUvVSP5p51pRUhgxFePm-LuVUeugrCg71Q-sbpR78_7njdqQD3XcjO8FOXwBBuai8A)
 
 !!! info "Recap On Delivery Period"
 
@@ -109,6 +113,8 @@ In the 7 days, three market makers submitted bids into Auction XYZ. During this 
 
 Start of Day 8, the Reveal Period starts and all three of them have 3 days to reveal their bids. No new bids can be submitted and market makers are not obligated to reveal. The winning bid will be selected from the pool of _revealed_ bids.
 
+[![](https://mermaid.ink/img/pako:eNptkk1rwzAMhv-KMIRdYkhSxiC3bdnWS2BsO6wlFxErrVliF1spK6X_fW6d0n3pZEt6n9fI2ovWKhKlWKFhbgyEUMj0aN2ADLAIIetaVpWcz2MZP7U_l5OFTAaZKJlMRbYKdzW6D3Jgu25Kau4JYtyOLWtr4H2xvPLwRIa89vCwse0aXmhL2MMzOW0VeEbHPhLuR-fIMLzpgUoYdE-eraEUiqwoZJ7JIpNZlkKmGhMVnqLP2QEg5u-0Ohv8iVKdmKDI5xd0Pjuhb1QE_HzkLwAG0-2EKFLAjsMcIm426SvqQ4vb_UcoW6c5qmff1IF0HdQiFQOFuWsV_mt_pDWC1zRQI8pwVNTh2HMjGnMIrTiyfd2ZVpTsRkrFuDn-a6Vx5XAQZYe9D9kNmqW1lzspzdbVcSdOq3H4AhqRo1E)](https://mermaid.live/edit#pako:eNptkk1rwzAMhv-KMIRdYkhSxiC3bdnWS2BsO6wlFxErrVliF1spK6X_fW6d0n3pZEt6n9fI2ovWKhKlWKFhbgyEUMj0aN2ADLAIIetaVpWcz2MZP7U_l5OFTAaZKJlMRbYKdzW6D3Jgu25Kau4JYtyOLWtr4H2xvPLwRIa89vCwse0aXmhL2MMzOW0VeEbHPhLuR-fIMLzpgUoYdE-eraEUiqwoZJ7JIpNZlkKmGhMVnqLP2QEg5u-0Ohv8iVKdmKDI5xd0Pjuhb1QE_HzkLwAG0-2EKFLAjsMcIm426SvqQ4vb_UcoW6c5qmff1IF0HdQiFQOFuWsV_mt_pDWC1zRQI8pwVNTh2HMjGnMIrTiyfd2ZVpTsRkrFuDn-a6Vx5XAQZYe9D9kNmqW1lzspzdbVcSdOq3H4AhqRo1E)
+
 ##### End of Day 10: Genesis Epoch Reveal Period Ends / Epoch 1 Bid Period Starts
 
 All market makers have revealed. Market Maker C has the highest bid and thus, wins the right to fill $200,000 of SOL-USDC orders!
@@ -121,24 +127,32 @@ This also marks the start of Epoch 1's Bid Period.
 
 ##### Start of Day 11: Genesis Epoch Delivery Period Begins
 
-Wallet A now has a maximum of 5 days to deliver $200,000 worth of SOL-USDC of [$20,$50). Let's say Wallet A delivers $140,000 in 1 day.
+Wallet A now has a maximum of 5 days to deliver $200,000 worth of SOL-USDC of [$20,$50). Let's say Wallet A delivers $140,000 in 2 days.
 
-##### End of Day 11: Epoch 1 Bid Period Ends
+[![](https://mermaid.ink/img/pako:eNqVk1FLAzEMx79KKAwVrnC7OYV7U6fuZSDqgxv3Uq65rXhtR5sbjrHvbrfe2E19mHlqk-aX_EO6YaWVyHI2F4aoMBBMCsIn67QggGkwPpnw0YiPxzEsvpQ_hHtT3tO8J3mvDZKVYj0R7hMd2KpqnYpqhGh3TUnKGviYzi48PKNBrzw8Lm25gBHWaoVuDS_olJXgSTjyCQgj2xd9uFfyNBxLPDTOoSF4Vxpz0KpGT9ZgAlmaZbyf8mzA0zSBVBYmZniMjRxaAIj-ToFflss9EyT6_hHdj-hbGQGvuEJR_83oALKgq6IwpggbtNk_Z3Cpw7x1o69OMCL0vmpBgw4oQIct6FTlYXxnqezSr0_pg3NElk5RzB52sgMp-4fIDuWmQxlGCkuYxrCDSobd3eyoBaMFaixYHo4SK9HUVLDCbMNT0ZB9W5uS5eQaTFiz3O34SIm5E5rllah98C6FmVl7vKNUZN0k_o_9N9l-A3N177Q)](https://mermaid.live/edit#pako:eNqVk1FLAzEMx79KKAwVrnC7OYV7U6fuZSDqgxv3Uq65rXhtR5sbjrHvbrfe2E19mHlqk-aX_EO6YaWVyHI2F4aoMBBMCsIn67QggGkwPpnw0YiPxzEsvpQ_hHtT3tO8J3mvDZKVYj0R7hMd2KpqnYpqhGh3TUnKGviYzi48PKNBrzw8Lm25gBHWaoVuDS_olJXgSTjyCQgj2xd9uFfyNBxLPDTOoSF4Vxpz0KpGT9ZgAlmaZbyf8mzA0zSBVBYmZniMjRxaAIj-ToFflss9EyT6_hHdj-hbGQGvuEJR_83oALKgq6IwpggbtNk_Z3Cpw7x1o69OMCL0vmpBgw4oQIct6FTlYXxnqezSr0_pg3NElk5RzB52sgMp-4fIDuWmQxlGCkuYxrCDSobd3eyoBaMFaixYHo4SK9HUVLDCbMNT0ZB9W5uS5eQaTFiz3O34SIm5E5rllah98C6FmVl7vKNUZN0k_o_9N9l-A3N177Q)
 
-Epoch 1's Bid Period is determined by the Genesis Epoch's Delivery Period, which ends when the shorter of these targets is reached:
+##### End of Day 12: Epoch 1 Bid Period Ends
 
-- 3.5 days `(Genesis Epoch Delivery Period * Time Factor) = 5 days * 70%`
-- $140,000 `(Notional * Notional Factor) = $200,000 * 70%`
+Epoch 1, which is a Generic Epoch, has a Bid Period end time that's dependent on which of the following happens first:
 
-Wallet A delivered $140,000 in 1 day so the second criteria is hit and triggers Epoch 1's Bid Period to end.
+- $140,000 `(Total Notional Size * Notional Factor = $200,000 * 70%)`
+- 3.5 days `(Genesis Epoch Delivery Days * Time Factor = 5 days * 70%)` since start of Delivery Period
+
+Remember the user-defined Genesis / Generic Epoch Delivery Period sets the maximum length. The actual Delivery Period might be shorter and in this case, Wallet ABC delivered $140,000 in 2 days.
+
+[![](https://mermaid.ink/img/pako:eNqVk1Fr2zAQx7_KIWbagjVkJ1nBb2uzrS8uYy2MDr8I6-yKWlKQzmFp6XefErnEYXvo7km-0_8n_c-nF9Y6haxivbREjYUYShJ-dd5IAniIweuar9f85iaV5W8d3srZA88MzxTPpiI5JXe19E_owXXdlNQ0IKT4KYcBCT5fXYPCQW_RB_hQLEUuhIDzS5FFGdw7kgPcOtLOxsWdfsaLHMjrvkevbQ_0iIBW7fd-2bj2EYqzAFdawfdYd-pjOvd69B4twb02WIHRAwZyFnMoRVnyQvByxYXIQajGJkXAdn8mfEOLQYeYSfkjGv6KSh2Y0U4ojuhicUBfqgT4gVuMTv7JmAHKHGRHsXcJtpjU69Sp3Zv-vI4_wYzm4pQj4-W3E2kxI0XqaiKd2px69z6bc_rylF6-x2XrNSX1aqZe_qfLGebTDLNKl2A5MxhHU6s40i97bMPirBhsWBWXCjs5DtSwxr7GrXIkd7ezLavIj5izcbMf_bWWvZeGVZ0cQsxupP3l3PEblSbn6_RsDq_n9Q8sr_PD)](https://mermaid.live/edit#pako:eNqVk1Fr2zAQx7_KIWbagjVkJ1nBb2uzrS8uYy2MDr8I6-yKWlKQzmFp6XefErnEYXvo7km-0_8n_c-nF9Y6haxivbREjYUYShJ-dd5IAniIweuar9f85iaV5W8d3srZA88MzxTPpiI5JXe19E_owXXdlNQ0IKT4KYcBCT5fXYPCQW_RB_hQLEUuhIDzS5FFGdw7kgPcOtLOxsWdfsaLHMjrvkevbQ_0iIBW7fd-2bj2EYqzAFdawfdYd-pjOvd69B4twb02WIHRAwZyFnMoRVnyQvByxYXIQajGJkXAdn8mfEOLQYeYSfkjGv6KSh2Y0U4ojuhicUBfqgT4gVuMTv7JmAHKHGRHsXcJtpjU69Sp3Zv-vI4_wYzm4pQj4-W3E2kxI0XqaiKd2px69z6bc_rylF6-x2XrNSX1aqZe_qfLGebTDLNKl2A5MxhHU6s40i97bMPirBhsWBWXCjs5DtSwxr7GrXIkd7ezLavIj5izcbMf_bWWvZeGVZ0cQsxupP3l3PEblSbn6_RsDq_n9Q8sr_PD)
 
 ##### End of Day 12: Generic Epoch Delivery Period Ends / Epoch 1's Reveal Period Ends
 
 Auction XYZ delivers the other $60,000 the next day and Genesis Epoch has officially ended. Epoch 1's Reveal Period also ended and the next $200,000 worth of SOL-USDC starts being delivered to the winner of Epoch 1.
 
+Note Epoch 1 has a different maximum Delivery Period because auction operator defines `Generic Epoch Delivery Period`.
+
+[![](https://mermaid.ink/img/pako:eNqVlG9r2zAQxr_KIRbYwC62syad37XNtr4JjG0wWvzmsM6tqCUF6RwWSr_7FMteHNpCcy_8507Pz_cI655EbSWJUtyjYa4MhJDI9M06jQxwGyJdr9PVKr25iWX8q_xYnt2mM53OZDobimwl7tboHsmBbZohqbgliPEH25YYLq-uQVKrtuQ88AOBDRcHHxZZkmUZKANoYirwAhVqqzdBSP3i72TIKw9fN7Z-OIs3KOBKSfhBTlkJntGxBxzWQD5mAorxkWAVP747iy1ed86RYfitNJWgVUueraEEiqwo0jxLi0WaZQlksjJR4almZc3_XgBiftLEiyhlzwzOfX5A5_MevZQR8JO2hO3rjAmgSAAb3m9QD5sP6tHXqP94WXOH7ae3MPMJpjhgjj2Oe3iix8_H7OI0g-cTdSDlbxlchx9Sd_rIYYmh8e0AWkxA57GN1-wV77M3JS-Pyfl7DNZOcVRfTNTLUw0eMF8mmItoTyRCUzihSoaT_bTHViKcG02VKMOjpAa7litRmeewFDu2v3amFiW7jhLRbfYTYKXw3qEWZYOtD9kNmjtrD-8kFVu3jtOjHyLP_wA1OkC-)](https://mermaid.live/edit#pako:eNqVlG9r2zAQxr_KIRbYwC62syad37XNtr4JjG0wWvzmsM6tqCUF6RwWSr_7FMteHNpCcy_8507Pz_cI655EbSWJUtyjYa4MhJDI9M06jQxwGyJdr9PVKr25iWX8q_xYnt2mM53OZDobimwl7tboHsmBbZohqbgliPEH25YYLq-uQVKrtuQ88AOBDRcHHxZZkmUZKANoYirwAhVqqzdBSP3i72TIKw9fN7Z-OIs3KOBKSfhBTlkJntGxBxzWQD5mAorxkWAVP747iy1ed86RYfitNJWgVUueraEEiqwo0jxLi0WaZQlksjJR4almZc3_XgBiftLEiyhlzwzOfX5A5_MevZQR8JO2hO3rjAmgSAAb3m9QD5sP6tHXqP94WXOH7ae3MPMJpjhgjj2Oe3iix8_H7OI0g-cTdSDlbxlchx9Sd_rIYYmh8e0AWkxA57GN1-wV77M3JS-Pyfl7DNZOcVRfTNTLUw0eMF8mmItoTyRCUzihSoaT_bTHViKcG02VKMOjpAa7litRmeewFDu2v3amFiW7jhLRbfYTYKXw3qEWZYOtD9kNmjtrD-8kFVu3jtOjHyLP_wA1OkC-)
+
 ##### Start of Day 13: Epoch 1 Delivery Period Starts
 
-All Generic Epochs have a user defined `Generic Epoch Delivery Period` (from above) which determines the maximum delivery period. Epoch 1's realized Delivery Period will be defined by the same logic as in this step above: **End of Day 11**. End of Epoch 1's Delivery Period will determine start of Epoch 2's Delivery Period.
+Epoch 1's realized Delivery Period will be defined by the same logic as above. End of Epoch 1's Delivery Period will determine start of Epoch 2's Delivery Period.
 
 Auction XYZ will roll over indefinitely until it's cancelled.
 
@@ -150,8 +164,8 @@ Auction XYZ will roll over indefinitely until it's cancelled.
 
 2.  Having `Time Factor` and `Notional Factor` ensures market makers have sufficient time to reveal bids, ensuring the winner of next epoch is known in advance:
 
-    - `Epoch N`'s Bid Period ends 70% into `Epoch N-1`'s Delivery Period
+    - E.g. `Epoch N` auction winner is revealed at 70% of `Epoch N-1`'s Delivery Period
 
 3.  Epoch rolls over to next efficiently and deterministically
 
-    - `Epoch N`'s Delivery Period is based on both `Notional` and a user defined parameter
+    - `Epoch N`'s Delivery Period is based on both `Notional` and a user defined parameter (i.e `Genesis Epoch Delivery Period` or `Generic Epoch Delivery Period`)

@@ -4,7 +4,7 @@ nav:
       - Understanding DFlow: index.md
       - "🔍 Core Concepts":
           - Order Flow Auction: order-flow-auction.md
-          - Flow Rate: flow-rate.md
+          - Flow Price: flow-price.md
       - "📐 Protocol Design":
           - DFlow Node: dflow-node.md
           - Signatory Server: signatory-server.md

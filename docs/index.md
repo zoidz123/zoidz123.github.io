@@ -2,7 +2,9 @@
 
 ## DFlow: D*ecentralized* Flow
 
-DFlow is the infrastructure for a novel, open and fair payment-for-order-flow model. The infrastructure allows order flow sources, such as wallets and swappers, to monetize their order flow by creating order flow auctions on DFlow. Market makers will then bid into these auctions to win the right to fill orders.
+DFlow is the infrastructure for a decentralized, open and fair payment-for-order-flow model. The infrastructure allows any crypto brokerages, such as wallets and swappers, to monetize their order flow by creating order flow auctions on DFlow. Market makers will then bid into these auctions to win the right to fill orders.
+
+[![](https://mermaid.ink/img/pako:eNpVkEFvwjAMhf9KlF2YBIKNnappB4p6Wi-w0wgHq3EhIk0q1x2qSv_73II0zafYet_Ls3tdRIs60aWP1-IMxOpzZ4KScvZldtghg_Pqi8AiNcfn98Xi47a_Qq0gWEVYoPtBxfGCobk5-zpLqas5qg3JiOCEzQNBkUcaTf6RNXQVBh7Zdb_NJITKJZAfJmrjrHJB7KAt2MVwZ0vn_cNLsLfDMge6IKsc5MtmebzHb7jzKEusJ33ylGVpulqZoOe6QqrAWdm6H7VG8xkrNDqRp8USWs9GmzCIFFqO-y4UOmFqca7b2gLj1sGJoNJJCb6RaQ3hO8a_Hq3jSPn9stOBh19bMHx4)](https://mermaid.live/edit#pako:eNpVkEFvwjAMhf9KlF2YBIKNnappB4p6Wi-w0wgHq3EhIk0q1x2qSv_73II0zafYet_Ls3tdRIs60aWP1-IMxOpzZ4KScvZldtghg_Pqi8AiNcfn98Xi47a_Qq0gWEVYoPtBxfGCobk5-zpLqas5qg3JiOCEzQNBkUcaTf6RNXQVBh7Zdb_NJITKJZAfJmrjrHJB7KAt2MVwZ0vn_cNLsLfDMge6IKsc5MtmebzHb7jzKEusJ33ylGVpulqZoOe6QqrAWdm6H7VG8xkrNDqRp8USWs9GmzCIFFqO-y4UOmFqca7b2gLj1sGJoNJJCb6RaQ3hO8a_Hq3jSPn9stOBh19bMHx4)
 
 !!! info "Helpful Concepts"
 
@@ -23,6 +25,3 @@ Each DFlow node will run a signatory server, an off-chain sidecar that handles p
 ### Endorsement Server
 
 DFlow's application layer payment-for-order-flow model associates user intent with order flow, which improves market pricing of order flow. Every order flow source routing orders to DFlow incorporate intent into order flow by running an endorsement server. An endorsement server endorses certain actions on the DFlow network by attaching an Ed25519 public key to requests and transactions. Endorsing price quote requests and/or create auction transactions guarantees those actions came from the auction source and prevents DFlow network spam.
-
-<!-- Add a diagram -->
-<!-- Add a diagram -->

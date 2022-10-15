@@ -14,8 +14,8 @@ If the user submits the order (i.e. user signs the crafted transaction from sign
 
 ### Update DFlow Ledger
 
-TODO
+As order flow is delivered to auctions, the signatory server notifies the DFlow node to update the delivered notional amount. The delivered notional amount determines the progress of DFlow auctions.
 
 ### Monitor DFlow Native Bridge
 
-TODO
+Signatory servers check and validate transactions on both DFlow and Solana to ensure deposits and withdrawals have the correct state changes.
