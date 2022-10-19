@@ -1,6 +1,6 @@
 # Reveal Bid
 
-DFlow uses a first-price sealed-bid auction structure so if you submitted a bid into an auction epoch, you will need to reveal your bid to win the epoch. I.e. if you forget to reveal your bid but your bid was the highest bid, you will not win the auction epoch.
+DFlow uses first-price sealed-bid auctions so if you submitted a bid into an auction epoch, you will need to reveal your bid to win the epoch. I.e. if you forget to reveal your bid but your bid was the highest bid, you will not win the auction epoch.
 
 During the Reveal period, you will not be able to submit a new bid. By the end of the Reveal period, if you do not have the highest bid, whether you chose to reveal or not, you will get your bid amount returned. This bid-reveal scheme is meant to prevent a bidding war, where market makers bid the minimum amount to win the auction epoch.
 

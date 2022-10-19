@@ -1,30 +1,67 @@
 # Order Flow Auction
 
-The DFlow order flow auction is core to DFlow and understanding auction mechanics is fundamental to understanding the DFlow payment-for-order-flow model. Order flow sources sell order flow by creating these order flow auctions and market makers bid on them to receive the right to fill the underlying order flow.
+The DFlow order flow auction is core to DFlow and is fundamental to understanding the DFlow payment-for-order-flow model. Crypto brokerages sell order flow by creating order flow auctions and market makers bid on them to receive the right to fill the underlying order flow.
 
-DFlow will release an intuitive [DFlow Dashboard](dashboard.md) to let order flow sources easily create auctions.
-
-!!! info "Order Flow Source Examples"
-
-    Order flow sources include on-chain wallets (e.g. MetaMask, Phantom) and aggregators (e.g. 1Inch, Jupiter Aggregator). They are the on-chain versions of traditional brokerages.
+The DFlow interface lets brokerages easily create and manage order flow auctions.
 
 ## Overview
 
-DFlow brings transparency and fairness to the PFOF models seen in traditional equities and options markets. By conducting PFOF on the blockchain (vs. using long-term contracts with opaque terms), DFlow allows participants to clearly see the entire trade lifecycle including order flow batching, bidding, and filling. Furthermore, a decentralized PFOF model allows any market maker to participate in bidding, which results in better pricing for users and more competitive payments for sources of order flow.
+DFlow brings transparency and fairness to the PFOF models seen in traditional equities and options markets. By conducting PFOF on the blockchain (vs. using long-term contracts with opaque terms), DFlow allows participants to clearly see the entire trade lifecycle including order flow batching, bidding, and filling. Furthermore, a decentralized PFOF model allows any market maker to participate in bidding, which results in better pricing for users and more competitive payments for crypto brokerages.
 
 ## Auction Structure
 
-Orders are batched and sold in auctions created by the order flow source. DFlow auctions are designed to allow flexibility for wallets and swappers to customize their own auctions based on a set of parameters.
+Orders are batched and sold in auctions created by the brokerages. DFlow auctions are designed to allow flexibility for them to customize their own auctions based on a set of parameters.
 
-[![](https://mermaid.ink/img/pako:eNrtlLFuwjAQhl8l8gwvkA0CQ6W0IEFVqcpytQ84NbbD2UZNCe9eB6hQCYo6tBue7Ps_6eRv-PdCWoUiFcgTgjWDLkwSz8soz6fL4ShpmuGwaZLRc7Z8mD3FQZpIRvDo-sHxb8HsGrys2p8G7XGeyayTN3CYBWY0su6E22D9jZSMTzQZ0kHPWCEv6BOvUvjoSY31ZA2U3WSNBh25aWXlZhIYWq6HwJJ2yPUcmazqckyylzv_coU4hxr5hhv5HqqctoEU-XrOdkfqmzv8dDu-u_03t9nd7R-6FQOhkTWQiiV1FFsIv0GNhUjjVeEKQukLUZgWheDtojZSpJ4DDkSoVCyWc7OJdAWli9MKzKu1lzfGvZYfT0V47MPDF2s2p7k)](https://mermaid.live/edit#pako:eNrtlLFuwjAQhl8l8gwvkA0CQ6W0IEFVqcpytQ84NbbD2UZNCe9eB6hQCYo6tBue7Ps_6eRv-PdCWoUiFcgTgjWDLkwSz8soz6fL4ShpmuGwaZLRc7Z8mD3FQZpIRvDo-sHxb8HsGrys2p8G7XGeyayTN3CYBWY0su6E22D9jZSMTzQZ0kHPWCEv6BOvUvjoSY31ZA2U3WSNBh25aWXlZhIYWq6HwJJ2yPUcmazqckyylzv_coU4hxr5hhv5HqqctoEU-XrOdkfqmzv8dDu-u_03t9nd7R-6FQOhkTWQiiV1FFsIv0GNhUjjVeEKQukLUZgWheDtojZSpJ4DDkSoVCyWc7OJdAWli9MKzKu1lzfGvZYfT0V47MPDF2s2p7k)
+```mermaid
+erDiagram
+    WALLET-A ||--|| AUCTION-A : creates
+    WALLET-A ||--|| AUCTION-B : creates
+    WALLET-A ||--|| AUCTION-C : creates
+    AUCTION-A {
+        string baseCurrency
+        string quoteCurrency
+        int minimumOrderSize
+        int maximumOrderSize
+        int notionalSize
+        int genesisEpochDuration
+        int genesisEpochDeliveryPeriod
+        int genericEpochDeliveryPeriod
+        string feePayer
+        string backupLiquidityProvider
+    }
+    AUCTION-B {
+        string baseCurrency
+        string quoteCurrency
+        int minimumOrderSize
+        int maximumOrderSize
+        int notionalSize
+        int genesisEpochDuration
+        int genesisEpochDeliveryPeriod
+        int genericEpochDeliveryPeriod
+        string feePayer
+        string backupLiquidityProvider
+    }
+    AUCTION-C {
+        string baseCurrency
+        string quoteCurrency
+        int minimumOrderSize
+        int maximumOrderSize
+        int notionalSize
+        int genesisEpochDuration
+        int genesisEpochDeliveryPeriod
+        int genericEpochDeliveryPeriod
+        string feePayer
+        string backupLiquidityProvider
+    }
+```
 
-DFlow auctions run in a parallel, sequential manner. Order flow sources can run multiple auctions at the same time, where each auction has a set of predetermined specs to identify the underlying order flow. To enable continuous, hassle-free order routing from wallets and swappers, each auction is automatically sold repeatedly where an epoch number is incremented to identify the vintage of a specific auction.
+DFlow auctions run in a parallel, sequential manner. Crypto brokerages can run multiple auctions at the same time, where each auction has a set of predetermined specs to identify the underlying order flow. To enable continuous, hassle-free order routing, each auction is automatically sold repeatedly where an epoch number is incremented to identify the vintage of a specific auction.
 
 Each auction only requires a one-time setup and will last as long as it's not canceled, manually by the auction owner or automatically when no bids occur. Once the auction is created, market makers participate in a first-price sealed-bid process.
 
 ### Structure Rationale
 
-As a result of this PFOF model, market makers bid in auctions to fill future batches of order flow, eliminating the speculation that market makers can see order details before paying for order flow. Market makers price auctions based on the predetermined specs.
+As a result of this PFOF model, market makers bid in auctions to fill future batches of order flow, eliminating the speculation that market makers can see order details before paying for order flow. Market makers price auctions based on the predetermined specs and external factors like where these order flow came from.
 
 A sequential auction model is chosen to enable continuous bidding and delivery of order flow.
 
@@ -34,25 +71,55 @@ An auction can have many epochs and it is expected auctions with higher epochs w
 
 - Bid: market makers submit bids into the current epoch of an auction
 - Reveal: market makers reveal bids (remember DFlow auctions are blind auctions)
-- Delivery: order flow source delivers order flow, amount as determined by `Notional`, to winning market maker
+- Delivery: crypto brokerages deliver order flow, amount as determined by `Notional`, to winning market maker
 
-Epochs roll over (i.e. current epoch ends) to the next epoch based on the behavior of the previous epoch, to ensure a continuous auction bid and delivery process. For more info on the details, see this [section](understanding-auction-behavior.md).
+Epochs roll over (i.e. current epoch ends) to the next epoch based on the behavior of the previous epoch, to ensure a continuous auction bid and delivery process. See this section for [more details on auction behavior](understanding-auction-behavior.md).
 
 !!! info "Why Reveal Period"
 
-    A Reveal Period is needed because DFlow uses a first-price sealed-bid auction (also called blind auctions), meaning bids are encrypted. Because bids are submitted to DFlow validators and by definition, they will be public in the mempool, there needs to be a Reveal Period.
+    A Reveal Period is needed because DFlow auctions are first-price sealed-bid auctions (also called blind auctions where the entity with the highest bid is the winner), meaning bids are encrypted. Because bids are submitted to DFlow validators and by definition, they will be public in the mempool, there needs to be a Reveal Period.
 
 #### Genesis Epoch
 
-Genesis Epoch is the first epoch of an auction. Auction owners define the Bid and Reveal period of this epoch by setting the `Genesis Epoch Duration`. They can also define the Delivery period by setting the `Genesis Epoch Delivery Period`. The reason behind a different treatment for the Genesis Epoch is to let auction owners prepare for the auction like sourcing bids from market makers and promoting their auctions.
+Genesis Epoch is the first epoch of an auction. Auction owners define the Bid and Reveal period of this epoch by setting the `Genesis Epoch Duration`. They can also define the Delivery period by setting the `Genesis Epoch Delivery Period`. The reason behind a different treatment for the Genesis Epoch is to let auction owners prepare for the auction like ensuring their system is properly set up, promoting their auction (i.e. on social media), establishing credibility etc.
 
-[![](https://mermaid.ink/img/pako:eNp1Uk1rwzAM_SvCUNggpvk4FHLb1m29FMa2S0cuIlZas8QujtKtlP33qXXGvnWS39N7krAOqvaGVKnW6JgrBxIGmW586JABVhJ6udTzuV4sIo2vtv-gJys96fTE6MlIsuWWIMaFAxxqtt5BHUhMDUiapdOsmOZpnsOL5Q3gEZKee7glR73t4Xrr6w3Mh4An7dnsxF5ak0BxSu9pR9iei9RA_peUWrujsIc7CtabcTIvhUsMzxTAN00Er4YQyDE82o5K6GxLPXtHCXRZAscZdZbqrNBZXrmo6Clu9NERIOIy3tgOfkWJotmJKxjqvxunaQKzccK41t8uZR0sR4M8AWxYtohmxaj-sfR_6uKLWpxyoxLVkfymNXIFh6NXpXhDHVWqlNRQg0PLlarcm5TiwP5h72pVchgoUcP2eC1zi-uAnSobbHtBt-ievP98k7HswzJe2ung3t4BmBK9jA)](https://mermaid.live/edit#pako:eNp1Uk1rwzAM_SvCUNggpvk4FHLb1m29FMa2S0cuIlZas8QujtKtlP33qXXGvnWS39N7krAOqvaGVKnW6JgrBxIGmW586JABVhJ6udTzuV4sIo2vtv-gJys96fTE6MlIsuWWIMaFAxxqtt5BHUhMDUiapdOsmOZpnsOL5Q3gEZKee7glR73t4Xrr6w3Mh4An7dnsxF5ak0BxSu9pR9iei9RA_peUWrujsIc7CtabcTIvhUsMzxTAN00Er4YQyDE82o5K6GxLPXtHCXRZAscZdZbqrNBZXrmo6Clu9NERIOIy3tgOfkWJotmJKxjqvxunaQKzccK41t8uZR0sR4M8AWxYtohmxaj-sfR_6uKLWpxyoxLVkfymNXIFh6NXpXhDHVWqlNRQg0PLlarcm5TiwP5h72pVchgoUcP2eC1zi-uAnSobbHtBt-ievP98k7HswzJe2ung3t4BmBK9jA)
+```mermaid
+gantt
+    dateFormat  YYYY-MM-DD-HH
+    axisFormat  %Y-%m-%d-%H
+    title       An auction created on 10/13/2022 with an 10 day Genesis Epoch Duration (7 day Bid, 3 day Reveal) and 2 day Genesis Epoch Delivery Period
+    todayMarker off
+    Current Time: milestone, m1, 2022-10-13-12
+
+    section Genesis
+    Bid Period                  :active,  des1, 2022-10-13-00, 7d
+    Reveal Period               :crit,  des2, after des1, 3d
+    Delivery Period             :crit,  des3, after des2, 2d
+```
 
 #### Generic Epoch
 
 All epochs, excluding the first epoch, are classified as Generic Epoch. Generic Epoch Bid and Reveal periods are no longer user-defined and will depend on the previous epoch's Delivery Period. In this case, a new epoch starts when the Delivery period of the previous epoch starts and this epoch ends when its Delivery period ends (or when `Notional` amount is reached).
 
-[![](https://mermaid.ink/img/pako:eNqNk1FP2zAQx7_KyVK1IcXQpLBJedyqjYcVIeAFlBcvvjQWsV3Zl4oK8d251CltQZu4l8R3_v_Of8v3LGqvUZRiqRxR5YBDK8JfPlhFAPcccrGQ87m8vExl9WTirjy5lxMrJ1pOxiJ5rTYLFR4xgG-aMWmoQ0jxB92SWq6BcoArX7dfIvwwmpcabnCNqoNrDMbrCCaCRsJgjUMNfzdw5cl4xzvujEX4OsfOrDFw7a1wBnee-LtLnJzCdcC18X186zbKNmMfiEgRqEWwbM32ls9r8TQd_WcfAjraNizBmg4jeYcZFNOikPlUFjM5nWaQF23lkiRiPfSG3-gwsgWAlB9Mjh0_RKm3ULYb8z07T-zvOgGObuffgCID1fCtjbDZqH7v-kit-MjrUT870DOr0IOxj9aCqT9n7ZB9fsyenbefsFYHQ0l-cSBnVL6T_9fbXv7tQM6oXItMWH5eymiegOeBVQl-CBYrUfKvxkb1HVWici-8VfXkbzeuFiWFHjPRr4ZJmRu1DMqKslFd5OxKuQfv92vUhnxYpCnbDtvLK1IzCZw)](https://mermaid.live/edit#pako:eNqNk1FP2zAQx7_KyVK1IcXQpLBJedyqjYcVIeAFlBcvvjQWsV3Zl4oK8d251CltQZu4l8R3_v_Of8v3LGqvUZRiqRxR5YBDK8JfPlhFAPcccrGQ87m8vExl9WTirjy5lxMrJ1pOxiJ5rTYLFR4xgG-aMWmoQ0jxB92SWq6BcoArX7dfIvwwmpcabnCNqoNrDMbrCCaCRsJgjUMNfzdw5cl4xzvujEX4OsfOrDFw7a1wBnee-LtLnJzCdcC18X186zbKNmMfiEgRqEWwbM32ls9r8TQd_WcfAjraNizBmg4jeYcZFNOikPlUFjM5nWaQF23lkiRiPfSG3-gwsgWAlB9Mjh0_RKm3ULYb8z07T-zvOgGObuffgCID1fCtjbDZqH7v-kit-MjrUT870DOr0IOxj9aCqT9n7ZB9fsyenbefsFYHQ0l-cSBnVL6T_9fbXv7tQM6oXItMWH5eymiegOeBVQl-CBYrUfKvxkb1HVWici-8VfXkbzeuFiWFHjPRr4ZJmRu1DMqKslFd5OxKuQfv92vUhnxYpCnbDtvLK1IzCZw)
+```mermaid
+gantt
+    dateFormat  YYYY-MM-DD-HH
+    axisFormat  %Y-%m-%d-%H
+    todayMarker off
+    title       Length of an epoch's Bid and Reveal Periods is determined by Notional Time (Delivered Notional / Total Notional). Previous epoch's Delivery Period sets the maximum time.
+    Current Time: milestone, 2022-10-23-00, 12h
+
+    section Genesis
+    Bid Period                  :done,  des1, 2022-10-13-00, 7d
+    Reveal Period               :done,  des2, after des1, 3d
+    Delivery Period             :active,  des3, after des2, 2d
+
+
+    section Generic
+    Bid Period                  :active,  des4, after des2, 34h
+    Reveal Period               :crit,  des5, after des4, 14h
+    Delivery Period             :crit,  des6, after des5, 1d
+```
 
 ## Auction Parameters
 

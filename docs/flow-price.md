@@ -12,4 +12,4 @@ Order flow belongs to the users. By introducing live, market-based pricing for o
 
 Prices are retrieved live from DFlow auctions, where market makers compete by bidding into auctions to win rights to fill orders of a specific token pair.
 
-Order flow pricing will be an integral part of the [DFlow Public Dashboard](public-dashboard.md), which will be released soon. Crypto brokerages can also take advantage of live public order flow prices to make calculations on what that means for their existing order flow.
+Order flow pricing will be shown like stock prices and be an integral part of the [DFlow interface](wallet-dashboard.md). Crypto brokerages can also take advantage of live public order flow prices to make calculations on what that means for their existing order flow.

@@ -2,7 +2,9 @@
 
 DFlow Protocol emits events to mark important time periods in the auction process.
 
-## New Epoch Starts
+_(This section will be updated.)_
+
+<!-- ## New Epoch Starts
 
 TODO
 
@@ -16,4 +18,4 @@ TODO
 
 ## Epoch Winner Announced
 
-TODO
+TODO -->

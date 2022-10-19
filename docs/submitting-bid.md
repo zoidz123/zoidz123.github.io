@@ -12,11 +12,11 @@ There is no limit on the number of auctions you can bid into. If you are taking 
 
 !!! info "Bidding vs. Reveal Period"
 
-    Each auction epoch has both a Bidding and Reveal period. The Bidding period lasts as long as the Delivery Period of the previous epoch multiplied by a time factor, to ensure a smooth epoch rollover process. Immediately after Bidding period ends, you can no longer place a new bid and can reveal your bid, which will reveal the winner of that epoch.
+    Each auction epoch has both a Bidding and Reveal period. The Bidding period lasts as long as the Delivery Period of the previous epoch multiplied by a factor (e.g. `Time Factor` or `Notional Factor`), to ensure a smooth epoch rollover process. Immediately after Bidding period ends, you can no longer place a new bid and can reveal your bid, which will reveal the winner of that epoch.
 
-!!! info "Delivery Period Length"
+!!! info "_Actual_ Delivery Period Length"
 
-    Every auction defines its own Delivery Period, which is based off the `Notional` amount and `Generic Epoch Delivery Period` (or `Genesis Epoch Delivery Period` for the first epoch), whichever comes first.
+    Every auction defines its own *maximum* Delivery Period but the *actual* length is based off the `Notional` amount and `Generic Epoch Delivery Period` (or `Genesis Epoch Delivery Period` for the first epoch), whichever comes first.
 
 ## A Bidding Example
 

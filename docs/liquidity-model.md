@@ -8,17 +8,15 @@ Here's an overview of popular liquidity models and all of this is relevant becau
 
 All liquidity models are designed to find asset prices, but they result in different properties.
 
-## Common On-Chain Models
-
 ### Central Limit Order Book (CLOB)
 
 CLOB is the most widely used exchange method in traditional markets. An order book provides liquidity and price discovery for assets by having market makers put up bid and ask prices. While market makers provide liquidity, market takers take liquidity off the order book (e.g. Bob market buys 50 SOL at $10).
 
-The primary reason CLOBs are not prevalent on-chain is because Ethereum, the largest L1, has high gas costs which make putting up and cancelling quotes very expensive for market makers. What makes Solana special is its high throughput and low transaction costs, which allowed Serum to build an on-chain CLOB.
+The primary reason CLOBs are not prevalent on-chain is because Ethereum, the largest L1, has high gas costs which make putting up and cancelling quotes very expensive for market makers. On the other hand, Solana's high throughput and low cost network allows Serum, an on-chain CLOB, to be built.
 
 ### Automated Market Maker (AMM)
 
-AMMs were made popular by blockchain constraints. Instead of an order book, AMMs enable price discovery through pooled capital from liquidity providers (LPs). The LPs on AMMs are similar to the market makers on order books; however, LPs are mostly passive and do not quote bid and ask prices (concentrated liquidity is an exception). Pricing of assets is done by market forces based on a mathematical formula such as the constant product formula, `x * y = k`.
+AMMs were built and popularized under blockchain constraints. Instead of an order book, AMMs enable price discovery through pooled capital from liquidity providers (LPs). The LPs on AMMs are similar to the market makers on order books; however, LPs are mostly passive and do not quote bid and ask prices (concentrated liquidity is an exception). Pricing of assets is done by market forces based on a mathematical formula such as the constant product formula, `x * y = k`.
 
 ### Request for quote (RFQ)
 

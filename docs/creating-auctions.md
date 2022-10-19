@@ -1,12 +1,12 @@
 # Creating Auctions
 
-The first step to selling / routing order flow to DFlow is creating order flow auctions through the DFlow Wallet Dashboard.
+The first step to selling / routing order flow to DFlow is creating order flow auctions through the DFlow interface.
 
-Each [order flow auction](order-flow-auction.md) is like a contract and represents a unique grade of order flow, as determined by a set of user-defined parameters. You have the flexibility to tranche user orders based on specific wants and needs. Market makers will view auction specs and submit bids in a first-price sealed-bid manner.
+Each [order flow auction](order-flow-auction.md) is like a contract and represents a unique grade of order flow, as determined by a set of user-defined parameters. You have the flexibility to tranche user orders based on specific wants and needs. Market makers will view auction specs and submit bids in first-price sealed-bid auctions.
 
-## DFlow Dashboard
+## An Intuitive Interface
 
-The [DFlow Dashboard](dashboard.md) serves as the hassle-free control center for wallets to enable a robust order flow selling business. The main use cases of the dashboard are to allow you to create and manage auctions, and view payments received from market makers.
+The DFlow interface serves as the hassle-free control center for crypto brokerages and enables them to sell order flow to market makers in competitive and transparent auctions. Its main use cases are to allow you to create and manage auctions, and view payments received from market makers.
 
 ## Deposit USDC
 

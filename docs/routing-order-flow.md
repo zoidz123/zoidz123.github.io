@@ -22,4 +22,19 @@ Imagine you created this order flow auction:
 
 When you receive new order flow, you will need a way to route orders efficiently to above auction:
 
-[![](https://mermaid.ink/img/pako:eNpV0FFLwzAQB_Cvchx7XGGCT31QXDO3gTqx-qDtHmJz3QJNrqSpY7T97rZuozNPyf9-5ODfYMaKMMS84EO2l87Du0gt9OchWduMjbY72DhFrtpCENzBvFlXoD3Em6fgIxbRfXfi82HaflLVQnQm3-QPRBYmNzOQVsHkdnbR0ajFoAUV-ofcEV7JaVbAJdlrO-gXbuExWVi1HTde8sVVLsa_l8kb157-DQa-OnOcoiFnpFZ9Bc2gUvR7MpRi2F8V5bIufIqp7Xoqa8_x0WYYelfTFOtSSU9Cy52TBsNcFlWfltJ-MY9vUtqzez7V_Nd29wtLwnWh)](https://mermaid.live/edit#pako:eNpV0FFLwzAQB_Cvchx7XGGCT31QXDO3gTqx-qDtHmJz3QJNrqSpY7T97rZuozNPyf9-5ODfYMaKMMS84EO2l87Du0gt9OchWduMjbY72DhFrtpCENzBvFlXoD3Em6fgIxbRfXfi82HaflLVQnQm3-QPRBYmNzOQVsHkdnbR0ajFoAUV-ofcEV7JaVbAJdlrO-gXbuExWVi1HTde8sVVLsa_l8kb157-DQa-OnOcoiFnpFZ9Bc2gUvR7MpRi2F8V5bIufIqp7Xoqa8_x0WYYelfTFOtSSU9Cy52TBsNcFlWfltJ-MY9vUtqzez7V_Nd29wtLwnWh)
+```mermaid
+flowchart TD
+    A[Incoming Orders] --> B([Is it SOL-USDC?])
+    B -->|Yes| C([Is it between $10 and $40?])
+    C -->|Yes| D([Is Delivery Period open?])
+    C ---->|No| F[End]
+    B ---->|No| E[End]
+    D -->|Yes| G[Route]
+    D -->|No| H[End]
+```
+
+!!! info "Recap On Delivery Period"
+
+    You can only deliver orders if the value you defined for `Generic Epoch Delivery Day` has not ended. Or, your delivered notional size already hit the `Notional`, which is $200,000 here.
+
+    Mkae sure you understand the [auction behavior](understanding-auction-behavior.md) first!

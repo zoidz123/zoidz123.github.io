@@ -1,20 +1,18 @@
 site_name: DFlow Documentation
 nav:
-  - "🍃 DFlow Protocol":
+  - "🍃 DFlow":
       - Understanding DFlow: index.md
       - "🔍 Core Concepts":
           - Order Flow Auction: order-flow-auction.md
           - Flow Price: flow-price.md
-      - "📐 Protocol Design":
+      - "📐 Protocol Architecture":
           - DFlow Node: dflow-node.md
           - Signatory Server: signatory-server.md
           - Endorsement Server: endorsement-server.md
           - DFlow Native Bridge: bridge.md
-  - "🧰 DFlow Products":
-      - Public Dashboard: public-dashboard.md
-      - Wallet Dashboard: wallet-dashboard.md
-      - Tsunami: tsunami.md
-      # - Market Maker Dashboard: mm-dashboard.md
+      - "🧰 Use Cases":
+          - OF Marketplace: wallet-dashboard.md
+          # - 0 Fee Swapping: tsunami.md
   - "🛠️ Guides":
       - Getting Started: getting-started.md
       - "🌎 General":
@@ -33,6 +31,7 @@ nav:
           - Filling Order: fill-order.md
   - "📚 Helpful Concepts":
       - Liquidity Models: liquidity-model.md
+      - Crypto Brokerages: crypto-brokerages.md
       - Payment-for-order-flow: payment-for-order-flow.md
       - Price Improvement: price-improvement.md
       - Order Flow Toxicity: order-flow-toxicity.md
@@ -85,8 +84,17 @@ markdown_extensions:
   - pymdownx.tabbed:
       alternate_style: true
   - attr_list
+  - md_in_html
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
+  - def_list
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
 extra_css:
   - stylesheets/extra.css

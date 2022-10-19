@@ -36,6 +36,8 @@ Fetching a Firm Quote, unlike an Indicative Quote, also returns a crafted DFlow 
 
 Note this price quote endpoint is rate-limited which means you should refrain from retrieving Firm Quotes unless necessary, meaning user has intent of submitting order.
 
+<!-- What's the rate limit? -->
+
 === "TypeScript"
 
     ``` ts

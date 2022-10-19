@@ -56,7 +56,20 @@ Unlike the Genesis Epoch's Bid Period, the Bid Period of the Generic Epoch is de
 
 The Reveal Period will last until the end of the previous epoch's Delivery Period. The Delivery Period of this epoch starts thereafter and will determine the Bid + Reveal Period of the next epoch.
 
-[![](https://mermaid.ink/img/pako:eNqNUstOwzAQ_JWVERKP9sKBQ1SBSFJeEi1quUDTgxuvGwvHjhwHKE3_HcdNU4QQIqeNZ3dmdrRrkmqGJCBc6vc0o8bCU5wocN_hIZR2JRHugQspg4PFgvdKa_QrBgf8_Lyt---C2Sw4Kz56qZbaOIzzRG05rmYxWjS5UEItQXAIBYNHNEIzECXoAtUc-v0LCI9mdyXYzD1SuEGFZQMbXxqRwrDQaXY5P97Shs1M3bbVEPvhqDIGlfMvciwtzQsYwFWVWqEVTK3frENOOw1PDHFlqG888U1wTVOrTacXe71ndFo3jdS48b2HGnCka7idjbT1IFDFYIJvSOVu3YyWsMBltRsM28F2wxoiv0WMUryhQQaOyzlyBIN9ORWf6Dx2_1ufMJ78uX1rZOg8_Yygy3YnvNr5_T2JqHXtsxj-yCL6lsX1_7IgPZK7-6CCuRtcNzQJsRnmmJDAlQw5raRNSKI2rpVWVk9XKiWBNRX2SFUwajEWdGloTgJOZeleC6petN7_IxNuhYftnftz33wBquX6qg)](https://mermaid.live/edit#pako:eNqNUstOwzAQ_JWVERKP9sKBQ1SBSFJeEi1quUDTgxuvGwvHjhwHKE3_HcdNU4QQIqeNZ3dmdrRrkmqGJCBc6vc0o8bCU5wocN_hIZR2JRHugQspg4PFgvdKa_QrBgf8_Lyt---C2Sw4Kz56qZbaOIzzRG05rmYxWjS5UEItQXAIBYNHNEIzECXoAtUc-v0LCI9mdyXYzD1SuEGFZQMbXxqRwrDQaXY5P97Shs1M3bbVEPvhqDIGlfMvciwtzQsYwFWVWqEVTK3frENOOw1PDHFlqG888U1wTVOrTacXe71ndFo3jdS48b2HGnCka7idjbT1IFDFYIJvSOVu3YyWsMBltRsM28F2wxoiv0WMUryhQQaOyzlyBIN9ORWf6Dx2_1ufMJ78uX1rZOg8_Yygy3YnvNr5_T2JqHXtsxj-yCL6lsX1_7IgPZK7-6CCuRtcNzQJsRnmmJDAlQw5raRNSKI2rpVWVk9XKiWBNRX2SFUwajEWdGloTgJOZeleC6petN7_IxNuhYftnftz33wBquX6qg)
+```mermaid
+
+flowchart TD
+    %% style J fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff
+
+    A[Determining if Bid Period is open] --> B([Is this a Genesis or Generic Epoch?])
+    B -->|Genesis| D([Is Current Timestamp < Auction Start Timestamp + Genesis Epoch Duration * Time Factor?])
+    D -->|Yes| G[Is Open]
+    D ---->|No| H[Not Open and Reveal Period has begun]
+    B ---->|Generic| C([Is Delivered Notional < Notional Size * Notional Factor OR Current Timestamp < Auction Reveal End Timestamp + Generic Epoch Delivery Period * Time Factor?])
+    C ---->|Yes| E[Is Open]
+    C ---->|No| F[Not Open and Reveal Period has begun]
+
+```
 
 ## A Rollover Example
 
@@ -93,7 +106,19 @@ Auction XYZ's Genesis Epoch have the following Bid, Reveal, and Delivery Period:
 - Reveal Period: 3 days `(Genesis Epoch Duration - Genesis Epoch Bid Period)`
 - Delivery Period: the shorter of 5 days `(Genesis Epoch Delivery Period)` or when $200,000 `(Notional)` is delivered
 
-[![](https://mermaid.ink/img/pako:eNp1klFLwzAQx7_KESgoNKztEKFv24rupSAq6KQvobnOYJOM9DocY9_dm9lQmN5Lkv_d_3dwub1ovUZRirVyRI0DDq0I73ywigBWHLKuZVXJ5TKm1acZzulkJRMrEy2TU5K8VrtahQ8M4LvuJBrqEWK8qL5Hgtl8AW1A7jTAbGzJeAevqzfgI88m-XRSZEUR3YsxBHQEz8ZiCdb0OJB3mMKxROaZzKcyy1LIdOOiY8AIvEeHgxlYifrcaHjAYLyGiygVe7ZMBY1DfgG_1RHxiFtU_d-Usg2GIqBIQXXEM4iw6cldYc89wu7sv7I8TDva6_84018cZt4wR6TCIk_faP61_ZHbCHpHi40o-aqxU2NPjWjcgUvVSP5p51pRUhgxFePm-LuVUeugrCg71Q-sbpR78_7njdqQD3XcjO8FOXwBBuai8A)](https://mermaid.live/edit#pako:eNp1klFLwzAQx7_KESgoNKztEKFv24rupSAq6KQvobnOYJOM9DocY9_dm9lQmN5Lkv_d_3dwub1ovUZRirVyRI0DDq0I73ywigBWHLKuZVXJ5TKm1acZzulkJRMrEy2TU5K8VrtahQ8M4LvuJBrqEWK8qL5Hgtl8AW1A7jTAbGzJeAevqzfgI88m-XRSZEUR3YsxBHQEz8ZiCdb0OJB3mMKxROaZzKcyy1LIdOOiY8AIvEeHgxlYifrcaHjAYLyGiygVe7ZMBY1DfgG_1RHxiFtU_d-Usg2GIqBIQXXEM4iw6cldYc89wu7sv7I8TDva6_84018cZt4wR6TCIk_faP61_ZHbCHpHi40o-aqxU2NPjWjcgUvVSP5p51pRUhgxFePm-LuVUeugrCg71Q-sbpR78_7njdqQD3XcjO8FOXwBBuai8A)
+```mermaid
+gantt
+    dateFormat  YYYY-MM-DD-HH
+    axisFormat  %Y-%m-%d-%H
+    todayMarker off
+    title       Wallet ABC creates Auction XYZ on 10/13/2022
+    Current Time: milestone, 2022-10-13-00, 0d
+
+    section Genesis
+    Bid Period                  :active,  des1, 2022-10-13-00, 7d
+    Reveal Period               :crit,  des2, after des1, 3d
+    Delivery Period (maximum)             :crit,  des3, after des2, 5d
+```
 
 !!! info "Recap On Delivery Period"
 
@@ -113,7 +138,19 @@ In the 7 days, three market makers submitted bids into Auction XYZ. During this 
 
 Start of Day 8, the Reveal Period starts and all three of them have 3 days to reveal their bids. No new bids can be submitted and market makers are not obligated to reveal. The winning bid will be selected from the pool of _revealed_ bids.
 
-[![](https://mermaid.ink/img/pako:eNptkk1rwzAMhv-KMIRdYkhSxiC3bdnWS2BsO6wlFxErrVliF1spK6X_fW6d0n3pZEt6n9fI2ovWKhKlWKFhbgyEUMj0aN2ADLAIIetaVpWcz2MZP7U_l5OFTAaZKJlMRbYKdzW6D3Jgu25Kau4JYtyOLWtr4H2xvPLwRIa89vCwse0aXmhL2MMzOW0VeEbHPhLuR-fIMLzpgUoYdE-eraEUiqwoZJ7JIpNZlkKmGhMVnqLP2QEg5u-0Ohv8iVKdmKDI5xd0Pjuhb1QE_HzkLwAG0-2EKFLAjsMcIm426SvqQ4vb_UcoW6c5qmff1IF0HdQiFQOFuWsV_mt_pDWC1zRQI8pwVNTh2HMjGnMIrTiyfd2ZVpTsRkrFuDn-a6Vx5XAQZYe9D9kNmqW1lzspzdbVcSdOq3H4AhqRo1E)](https://mermaid.live/edit#pako:eNptkk1rwzAMhv-KMIRdYkhSxiC3bdnWS2BsO6wlFxErrVliF1spK6X_fW6d0n3pZEt6n9fI2ovWKhKlWKFhbgyEUMj0aN2ADLAIIetaVpWcz2MZP7U_l5OFTAaZKJlMRbYKdzW6D3Jgu25Kau4JYtyOLWtr4H2xvPLwRIa89vCwse0aXmhL2MMzOW0VeEbHPhLuR-fIMLzpgUoYdE-eraEUiqwoZJ7JIpNZlkKmGhMVnqLP2QEg5u-0Ohv8iVKdmKDI5xd0Pjuhb1QE_HzkLwAG0-2EKFLAjsMcIm426SvqQ4vb_UcoW6c5qmff1IF0HdQiFQOFuWsV_mt_pDWC1zRQI8pwVNTh2HMjGnMIrTiyfd2ZVpTsRkrFuDn-a6Vx5XAQZYe9D9kNmqW1lzspzdbVcSdOq3H4AhqRo1E)
+```mermaid
+gantt
+    dateFormat  YYYY-MM-DD-HH
+    axisFormat  %Y-%m-%d-%H
+    todayMarker off
+    title       Auction XYZ's Genesis Epoch Reveal Period starts
+    Current Time: milestone, 2022-10-20-00, 0d
+
+    section Genesis
+    Bid Period                  :done,  des1, 2022-10-13-00, 7d
+    Reveal Period               :active,  des2, after des1, 3d
+    Delivery Period             :crit,  des3, after des2, 5d
+```
 
 ##### End of Day 10: Genesis Epoch Reveal Period Ends / Epoch 1 Bid Period Starts
 
@@ -129,7 +166,24 @@ This also marks the start of Epoch 1's Bid Period.
 
 Wallet A now has a maximum of 5 days to deliver $200,000 worth of SOL-USDC of [$20,$50). Let's say Wallet A delivers $140,000 in 2 days.
 
-[![](https://mermaid.ink/img/pako:eNqVk1FLAzEMx79KKAwVrnC7OYV7U6fuZSDqgxv3Uq65rXhtR5sbjrHvbrfe2E19mHlqk-aX_EO6YaWVyHI2F4aoMBBMCsIn67QggGkwPpnw0YiPxzEsvpQ_hHtT3tO8J3mvDZKVYj0R7hMd2KpqnYpqhGh3TUnKGviYzi48PKNBrzw8Lm25gBHWaoVuDS_olJXgSTjyCQgj2xd9uFfyNBxLPDTOoSF4Vxpz0KpGT9ZgAlmaZbyf8mzA0zSBVBYmZniMjRxaAIj-ToFflss9EyT6_hHdj-hbGQGvuEJR_83oALKgq6IwpggbtNk_Z3Cpw7x1o69OMCL0vmpBgw4oQIct6FTlYXxnqezSr0_pg3NElk5RzB52sgMp-4fIDuWmQxlGCkuYxrCDSobd3eyoBaMFaixYHo4SK9HUVLDCbMNT0ZB9W5uS5eQaTFiz3O34SIm5E5rllah98C6FmVl7vKNUZN0k_o_9N9l-A3N177Q)](https://mermaid.live/edit#pako:eNqVk1FLAzEMx79KKAwVrnC7OYV7U6fuZSDqgxv3Uq65rXhtR5sbjrHvbrfe2E19mHlqk-aX_EO6YaWVyHI2F4aoMBBMCsIn67QggGkwPpnw0YiPxzEsvpQ_hHtT3tO8J3mvDZKVYj0R7hMd2KpqnYpqhGh3TUnKGviYzi48PKNBrzw8Lm25gBHWaoVuDS_olJXgSTjyCQgj2xd9uFfyNBxLPDTOoSF4Vxpz0KpGT9ZgAlmaZbyf8mzA0zSBVBYmZniMjRxaAIj-ToFflss9EyT6_hHdj-hbGQGvuEJR_83oALKgq6IwpggbtNk_Z3Cpw7x1o69OMCL0vmpBgw4oQIct6FTlYXxnqezSr0_pg3NElk5RzB52sgMp-4fIDuWmQxlGCkuYxrCDSobd3eyoBaMFaixYHo4SK9HUVLDCbMNT0ZB9W5uS5eQaTFiz3O34SIm5E5rllah98C6FmVl7vKNUZN0k_o_9N9l-A3N177Q)
+```mermaid
+gantt
+    dateFormat  YYYY-MM-DD-HH
+    axisFormat  %Y-%m-%d-%H
+    todayMarker off
+    title       Auction XYZ's Genesis Epoch Delivery Period starts, and Epoch 1 Bid Period starts
+    Current Time: milestone, 2022-10-23-00, 0d
+
+    section Genesis
+    Bid Period                  :done,  des1, 2022-10-13-00, 7d
+    Reveal Period               :done,  des2, after des1, 3d
+    Delivery Period (maximum)            :active,  des3, after des2, 5d
+
+    section Epoch 1
+    Bid Period                  :active,  des4, after des2, 3d
+    Reveal Period               :crit,  des5, after des4, 2d
+    Delivery Period (maximum)           :crit,  des6, after des5, 2d
+```
 
 ##### End of Day 12: Epoch 1 Bid Period Ends
 
@@ -140,7 +194,24 @@ Epoch 1, which is a Generic Epoch, has a Bid Period end time that's dependent on
 
 Remember the user-defined Genesis / Generic Epoch Delivery Period sets the maximum length. The actual Delivery Period might be shorter and in this case, Wallet ABC delivered $140,000 in 2 days.
 
-[![](https://mermaid.ink/img/pako:eNqVk1Fr2zAQx7_KIWbagjVkJ1nBb2uzrS8uYy2MDr8I6-yKWlKQzmFp6XefErnEYXvo7km-0_8n_c-nF9Y6haxivbREjYUYShJ-dd5IAniIweuar9f85iaV5W8d3srZA88MzxTPpiI5JXe19E_owXXdlNQ0IKT4KYcBCT5fXYPCQW_RB_hQLEUuhIDzS5FFGdw7kgPcOtLOxsWdfsaLHMjrvkevbQ_0iIBW7fd-2bj2EYqzAFdawfdYd-pjOvd69B4twb02WIHRAwZyFnMoRVnyQvByxYXIQajGJkXAdn8mfEOLQYeYSfkjGv6KSh2Y0U4ojuhicUBfqgT4gVuMTv7JmAHKHGRHsXcJtpjU69Sp3Zv-vI4_wYzm4pQj4-W3E2kxI0XqaiKd2px69z6bc_rylF6-x2XrNSX1aqZe_qfLGebTDLNKl2A5MxhHU6s40i97bMPirBhsWBWXCjs5DtSwxr7GrXIkd7ezLavIj5izcbMf_bWWvZeGVZ0cQsxupP3l3PEblSbn6_RsDq_n9Q8sr_PD)](https://mermaid.live/edit#pako:eNqVk1Fr2zAQx7_KIWbagjVkJ1nBb2uzrS8uYy2MDr8I6-yKWlKQzmFp6XefErnEYXvo7km-0_8n_c-nF9Y6haxivbREjYUYShJ-dd5IAniIweuar9f85iaV5W8d3srZA88MzxTPpiI5JXe19E_owXXdlNQ0IKT4KYcBCT5fXYPCQW_RB_hQLEUuhIDzS5FFGdw7kgPcOtLOxsWdfsaLHMjrvkevbQ_0iIBW7fd-2bj2EYqzAFdawfdYd-pjOvd69B4twb02WIHRAwZyFnMoRVnyQvByxYXIQajGJkXAdn8mfEOLQYeYSfkjGv6KSh2Y0U4ojuhicUBfqgT4gVuMTv7JmAHKHGRHsXcJtpjU69Sp3Zv-vI4_wYzm4pQj4-W3E2kxI0XqaiKd2px69z6bc_rylF6-x2XrNSX1aqZe_qfLGebTDLNKl2A5MxhHU6s40i97bMPirBhsWBWXCjs5DtSwxr7GrXIkd7ezLavIj5izcbMf_bWWvZeGVZ0cQsxupP3l3PEblSbn6_RsDq_n9Q8sr_PD)
+```mermaid
+gantt
+    dateFormat  YYYY-MM-DD-HH
+    axisFormat  %Y-%m-%d-%H
+    todayMarker off
+    title       Wallet ABC delivers $140,000 (70% of Total Notional Size), triggering the end of Epoch 1's Bid Period.
+    Current Time: milestone, 2022-10-25-00, 0d
+
+    section Genesis
+    Bid Period                  :done,  des1, 2022-10-13-00, 7d
+    Reveal Period               :done,  des2, after des1, 3d
+    Delivery Period (Maximum)             :active,  des3, after des2, 5d
+
+    section Epoch 1
+    Bid Period                  :active,  des4, after des2, 2d
+    Reveal Period               :crit,  des5, after des4, 3d
+    Delivery Period (Maximum)            :crit,  des6, after des5, 2d
+```
 
 ##### End of Day 12: Generic Epoch Delivery Period Ends / Epoch 1's Reveal Period Ends
 
@@ -148,7 +219,29 @@ Auction XYZ delivers the other $60,000 the next day and Genesis Epoch has offici
 
 Note Epoch 1 has a different maximum Delivery Period because auction operator defines `Generic Epoch Delivery Period`.
 
-[![](https://mermaid.ink/img/pako:eNqVlG9r2zAQxr_KIRbYwC62syad37XNtr4JjG0wWvzmsM6tqCUF6RwWSr_7FMteHNpCcy_8507Pz_cI655EbSWJUtyjYa4MhJDI9M06jQxwGyJdr9PVKr25iWX8q_xYnt2mM53OZDobimwl7tboHsmBbZohqbgliPEH25YYLq-uQVKrtuQ88AOBDRcHHxZZkmUZKANoYirwAhVqqzdBSP3i72TIKw9fN7Z-OIs3KOBKSfhBTlkJntGxBxzWQD5mAorxkWAVP747iy1ed86RYfitNJWgVUueraEEiqwo0jxLi0WaZQlksjJR4almZc3_XgBiftLEiyhlzwzOfX5A5_MevZQR8JO2hO3rjAmgSAAb3m9QD5sP6tHXqP94WXOH7ae3MPMJpjhgjj2Oe3iix8_H7OI0g-cTdSDlbxlchx9Sd_rIYYmh8e0AWkxA57GN1-wV77M3JS-Pyfl7DNZOcVRfTNTLUw0eMF8mmItoTyRCUzihSoaT_bTHViKcG02VKMOjpAa7litRmeewFDu2v3amFiW7jhLRbfYTYKXw3qEWZYOtD9kNmjtrD-8kFVu3jtOjHyLP_wA1OkC-)](https://mermaid.live/edit#pako:eNqVlG9r2zAQxr_KIRbYwC62syad37XNtr4JjG0wWvzmsM6tqCUF6RwWSr_7FMteHNpCcy_8507Pz_cI655EbSWJUtyjYa4MhJDI9M06jQxwGyJdr9PVKr25iWX8q_xYnt2mM53OZDobimwl7tboHsmBbZohqbgliPEH25YYLq-uQVKrtuQ88AOBDRcHHxZZkmUZKANoYirwAhVqqzdBSP3i72TIKw9fN7Z-OIs3KOBKSfhBTlkJntGxBxzWQD5mAorxkWAVP747iy1ed86RYfitNJWgVUueraEEiqwo0jxLi0WaZQlksjJR4almZc3_XgBiftLEiyhlzwzOfX5A5_MevZQR8JO2hO3rjAmgSAAb3m9QD5sP6tHXqP94WXOH7ae3MPMJpjhgjj2Oe3iix8_H7OI0g-cTdSDlbxlchx9Sd_rIYYmh8e0AWkxA57GN1-wV77M3JS-Pyfl7DNZOcVRfTNTLUw0eMF8mmItoTyRCUzihSoaT_bTHViKcG02VKMOjpAa7litRmeewFDu2v3amFiW7jhLRbfYTYKXw3qEWZYOtD9kNmjtrD-8kFVu3jtOjHyLP_wA1OkC-)
+```mermaid
+gantt
+    dateFormat  YYYY-MM-DD-HH
+    axisFormat  %Y-%m-%d-%H
+    todayMarker off
+    title       Wallet ABC delivers the other $60,000 in another day to complete the Genesis Epoch. Epoch 2 Bid Period starts as Epoch 1 starts to take Delivery.
+    Current Time: milestone, 2022-10-26-00, 0d
+
+    section Genesis
+    Bid Period                  :done,  des1, 2022-10-13-00, 7d
+    Reveal Period               :done,  des2, after des1, 3d
+    Delivery Period (Actual)             :done,  des3, after des2, 3d
+
+    section Epoch 1
+    Bid Period                  :done,  des4, after des2, 2d
+    Reveal Period               :done,  des5, after des4, 1d
+    Delivery Period (Maximum)            :active,  des6, after des5, 2d
+
+    section Epoch 2
+    Bid Period                  :active,  des7, after des5, 1d
+    Reveal Period               :crit,  des8, after des7, 1d
+    Delivery Period (Maximum)            :crit,  des9, after des8, 2d
+```
 
 ##### Start of Day 13: Epoch 1 Delivery Period Starts
 
