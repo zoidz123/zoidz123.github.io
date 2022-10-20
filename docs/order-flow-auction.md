@@ -88,12 +88,12 @@ gantt
     dateFormat  MM-DD
     axisFormat  %m-%d
     todayMarker off
-    Current Time: milestone, m1, 10-13
+    Current Time: milestone, 10-13, 12h
 
     section Genesis
-    Bid Period                  :active,  des1, 10-13, 7d
+    Bid Period                  :active,  des1, 10-13, 3d
     Reveal Period               :crit,  des2, after des1, 3d
-    Delivery Period             :crit,  des3, after des2, 2d
+    Delivery Period             :crit,  des3, after des2, 3d
 ```
 
 #### Generic Epoch
@@ -105,18 +105,18 @@ gantt
     dateFormat  MM-DD
     axisFormat  %m-%d
     todayMarker off
-    Current Time: milestone, 10-23, 12h
+    Current Time: milestone, 10-20, 12h
 
     section Genesis
-    Bid Period                  :done,  des1, 10-13, 7d
+    Bid Period                  :done,  des1, 10-13, 3d
     Reveal Period               :done,  des2, after des1, 3d
-    Delivery Period             :active,  des3, after des2, 2d
+    Delivery Period             :active,  des3, after des2, 3d
 
 
     section Generic
-    Bid Period                  :active,  des4, after des2, 34h
-    Reveal Period               :crit,  des5, after des4, 14h
-    Delivery Period             :crit,  des6, after des5, 1d
+    Bid Period                  :active,  des4, after des2, 2d
+    Reveal Period               :crit,  des5, after des4, 1d
+    Delivery Period             :crit,  des6, after des5, 2d
 ```
 
 ## Auction Parameters
