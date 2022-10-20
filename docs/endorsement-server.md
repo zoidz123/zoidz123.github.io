@@ -2,7 +2,7 @@
 
 An endorsement server endorses certain actions like sending an order to DFlow by signing and attaching an Ed25519 public key to the request or transaction. Endorsing price quote requests and/or create auction transactions guarantee those actions came from the auction source and prevent DFlow network spam.
 
-Every order flow source routing orders to DFlow will run an endorsement server, an off-chain program that is a core part of the DFlow payment-for-order-flow (PFOF) model. One of the key prerequisites to a successful PFOF model is associating intent with order flow (i.e. revealing level of adverse selection). Order flow with intent is valuable to market makers and a well-designed PFOF model returns value to the users.
+Every order flow source routing orders to DFlow will run an endorsement server, an off-chain program that is a core part of DFlow's open and fair PFOF model. One of the key prerequisites to a successful PFOF model is associating intent with order flow (i.e. revealing level of adverse selection). Order flow with intent is valuable to market makers and a well-designed PFOF model returns value to the users.
 
 ## Trading Venue Reveals Intent
 

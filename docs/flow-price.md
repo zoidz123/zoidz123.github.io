@@ -4,11 +4,11 @@ A marketplace for order flow means order flow can be priced, for the first time.
 
 ## Pricing Order Flow
 
-In traditional equities, payment-for-order-flow is conducted behind-the-scenes over contracts between the brokerage firm and the market maker (e.g. Robinhood and Citadel). Price and contract terms are both opaque, and clearly, this is a nonideal form of price discovery of order flow.
+In traditional equities, PFOF is conducted behind-the-scenes over contracts between the brokerage firm and the market maker (e.g. Robinhood and Citadel). Price and contract terms are both opaque, and clearly, this is a nonideal form of price discovery of order flow.
 
 ## Transparent Market Prices, _For the First Time_
 
-Order flow belongs to the users. By introducing live, market-based pricing for order flow, DFlow brings transparency to the gated payment-for-order-flow model found in traditional stock and options markets.
+Order flow belongs to the users. By introducing live, market-based pricing for order flow, DFlow brings transparency to the gated PFOF model found in traditional stock and options markets.
 
 Prices are retrieved live from DFlow auctions, where market makers compete by bidding into auctions to win rights to fill orders of a specific token pair.
 

@@ -1,6 +1,6 @@
 # Monitoring Auctions
 
-DFlow Protocol emits events to mark important time periods in the auction process.
+DFlow Protocol will emit events to mark important time periods in the auction process.
 
 _(This section will be updated.)_
 

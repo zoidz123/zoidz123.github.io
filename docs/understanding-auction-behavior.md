@@ -18,8 +18,8 @@ An auction is comprised of an indefinite number of epochs. An epoch defines the 
 
 The length is determined by the previous epoch. At any point in time, there will be two active epochs:
 
-- `Epoch N` will be receiving bids (in Bid Period)
-- `Epoch N-1` will be taking delivery (in Delivery Period)
+- **Epoch N** will be receiving bids (in Bid Period)
+- **Epoch N-1** will be taking delivery (in Delivery Period)
 
 DFlow defines two types of epochs that are both quite similar. If you are a market maker, you will be bidding into the latest epoch of an auction.
 
@@ -55,21 +55,6 @@ Unlike the Genesis Epoch's Bid Period, the Bid Period of the Generic Epoch is de
 #### From Reveal to Delivery
 
 The Reveal Period will last until the end of the previous epoch's Delivery Period. The Delivery Period of this epoch starts thereafter and will determine the Bid + Reveal Period of the next epoch.
-
-```mermaid
-
-flowchart TD
-    %% style J fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff
-
-    A[Determining if Bid Period is open] --> B([Is this a Genesis or Generic Epoch?])
-    B -->|Genesis| D([Is Current Timestamp < Auction Start Timestamp + Genesis Epoch Duration * Time Factor?])
-    D -->|Yes| G[Is Open]
-    D ---->|No| H[Not Open and Reveal Period has begun]
-    B ---->|Generic| C([Is Delivered Notional < Notional Size * Notional Factor OR Current Timestamp < Auction Reveal End Timestamp + Generic Epoch Delivery Period * Time Factor?])
-    C ---->|Yes| E[Is Open]
-    C ---->|No| F[Not Open and Reveal Period has begun]
-
-```
 
 ## A Rollover Example
 
@@ -249,7 +234,7 @@ Epoch 1's realized Delivery Period will be defined by the same logic as above. E
 
 Auction XYZ will roll over indefinitely until it's cancelled.
 
-## Rollover Takeaway
+<!-- ## Rollover Takeaway
 
 1.  This auction structure ensures a continuous delivery of order flow:
 
@@ -259,4 +244,4 @@ Auction XYZ will roll over indefinitely until it's cancelled.
 
 3.  Epoch rolls over to next depending on previous epoch
 
-    - `Epoch N`'s Delivery Period is based on both `Notional` and a user defined parameter (i.e `Genesis Epoch Delivery Period` or `Generic Epoch Delivery Period`)
+    - `Epoch N`'s Delivery Period is based on both `Notional` and a user defined parameter (i.e `Genesis Epoch Delivery Period` or `Generic Epoch Delivery Period`) -->

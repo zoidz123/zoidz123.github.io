@@ -1,6 +1,6 @@
 # Payment For Order Flow
 
-Payment-for-order-flow (PFOF) refers to market makers paying brokerage firms for their order flow. In other words, brokerages monetize their orders because of the inherent value in retail order flow.
+Payment For Order Flow (PFOF) refers to market makers paying brokerage firms for their order flow. In other words, brokerages monetize their orders because of the inherent value in retail order flow.
 
 This is a win-win situation for all participants because:
 
@@ -14,6 +14,6 @@ In traditional markets, PFOF has been criticized for lack of transparency behind
 
 Articles [here](https://www.bloomberg.com/opinion/articles/2021-02-05/robinhood-gamestop-saga-pressures-payment-for-order-flow#xj4y7vzkg) and [here](https://www.bloomberg.com/opinion/articles/2021-12-08/what-does-payment-for-order-flow-buy) go in-depth on the intuition and mechanics of PFOF.
 
-!!! info "Relation to DFlow"
+!!! info "Info"
 
     DFlow is reinventing the traditional PFOF model using a retail-first approach. By putting a heavy emphasis on transparency and fairness, DFlow algorithmically ensures best order execution.

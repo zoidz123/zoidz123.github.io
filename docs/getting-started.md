@@ -1,10 +1,10 @@
 # Getting Started
 
-This section will detail the onboarding process for both crypto brokerages (i.e. wallets, swappers, aggregators) and market makers.
+This section will detail the onboarding process for both order flow sources (i.e. wallets, swappers, aggregators) and market makers.
 
-## Crypto Brokerages
+## Order Flow Sources
 
-Crypto brokerages will need to complete a simple setup process of running an endorsement server and interfacing with the signatory server to be able to create order flow auctions and route orders to the appropriate auctions.
+Order flow sources will need to complete a simple setup process of running an endorsement server and interfacing with the signatory server to be able to create order flow auctions and route orders to the appropriate auctions.
 
 After the initial setup, brokerages will primarily use the DFlow interface to create and manage auctions, and carry out other day-to-day business operations.
 

@@ -15,7 +15,7 @@ An endorsement is done by attaching an Ed25519 public key and signature to the d
 
 To complete the endorsement server setup, you will need to generate an endorsement key, which can be any Ed25519 keypair. When you create your first auction, DFlow will prompt you to enter an existing public key (also an option to help you generate one). If your first auction is created successfully, DFlow will automatically generate an on-chain account for you which includes your endorsement key.
 
-!!! info "Save Your Endorsement Keypair"
+!!! info "Info"
 
     Save your endorsement private key and ensure the endorsement public key you generated is also used to set up the endorsement server later. DFlow will check if you signed with the correct key.
 

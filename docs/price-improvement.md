@@ -16,6 +16,6 @@ A transparent and competitive PFOF market is important for producing more effici
 
 In addition to price improvement, market makers can provide size improvement, which happens when the number of filled shares is greater than what's available at the NBBO. Price and size improvement together bring real savings to retail traders.
 
-!!! info "Relation to DFlow"
+!!! info "Info"
 
-    DFlow's PFOF model uses a price benchmark to algorithmically guarantee best execution from participating market makers.
+    DFlow's open and fair PFOF model uses a price benchmark to algorithmically guarantee best execution from participating market makers.

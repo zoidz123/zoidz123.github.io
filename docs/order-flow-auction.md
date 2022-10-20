@@ -1,12 +1,12 @@
 # Order Flow Auction
 
-The DFlow order flow auction is core to DFlow and is fundamental to understanding the DFlow payment-for-order-flow model. Crypto brokerages sell order flow by creating order flow auctions and market makers bid on them to receive the right to fill the underlying order flow.
+The DFlow order flow auction is core to DFlow and is fundamental to understanding DFlow's open and fair PFOF model. Crypto brokerages sell order flow by creating order flow auctions and market makers bid on them to receive the right to fill the underlying order flow.
 
 The DFlow interface lets brokerages easily create and manage order flow auctions.
 
 ## Overview
 
-DFlow brings transparency and fairness to the PFOF models seen in traditional equities and options markets. By conducting PFOF on the blockchain (vs. using long-term contracts with opaque terms), DFlow allows participants to clearly see the entire trade lifecycle including order flow batching, bidding, and filling. Furthermore, a decentralized PFOF model allows any market maker to participate in bidding, which results in better pricing for users and more competitive payments for crypto brokerages.
+DFlow brings transparency and fairness to the PFOF models seen in traditional equities and options markets. In traditional markets, order flow is sold using long-term contracts with opaque terms between brokerages and market makers. By conducting PFOF on the blockchain, DFlow allows participants to clearly see the entire trade lifecycle including order flow batching, bidding, and filling. Furthermore, a decentralized PFOF model allows any market maker to participate in bidding, which results in better price for users and more competitive payments for crypto brokerages.
 
 ## Auction Structure
 
@@ -85,14 +85,13 @@ Genesis Epoch is the first epoch of an auction. Auction owners define the Bid an
 
 ```mermaid
 gantt
-    dateFormat  YYYY-MM-DD-HH
-    axisFormat  %Y-%m-%d-%H
-    title       An auction created on 10/13/2022 with an 10 day Genesis Epoch Duration (7 day Bid, 3 day Reveal) and 2 day Genesis Epoch Delivery Period
+    dateFormat  MM-DD
+    axisFormat  %m-%d
     todayMarker off
-    Current Time: milestone, m1, 2022-10-13-12
+    Current Time: milestone, m1, 10-13
 
     section Genesis
-    Bid Period                  :active,  des1, 2022-10-13-00, 7d
+    Bid Period                  :active,  des1, 10-13, 7d
     Reveal Period               :crit,  des2, after des1, 3d
     Delivery Period             :crit,  des3, after des2, 2d
 ```
@@ -103,14 +102,13 @@ All epochs, excluding the first epoch, are classified as Generic Epoch. Generic 
 
 ```mermaid
 gantt
-    dateFormat  YYYY-MM-DD-HH
-    axisFormat  %Y-%m-%d-%H
+    dateFormat  MM-DD
+    axisFormat  %m-%d
     todayMarker off
-    title       Length of an epoch's Bid and Reveal Periods is determined by Notional Time (Delivered Notional / Total Notional). Previous epoch's Delivery Period sets the maximum time.
-    Current Time: milestone, 2022-10-23-00, 12h
+    Current Time: milestone, 10-23, 12h
 
     section Genesis
-    Bid Period                  :done,  des1, 2022-10-13-00, 7d
+    Bid Period                  :done,  des1, 10-13, 7d
     Reveal Period               :done,  des2, after des1, 3d
     Delivery Period             :active,  des3, after des2, 2d
 
@@ -163,7 +161,7 @@ As the name infers, the `Backup Liquidity Provider` is used as a backup when a m
 
 ## An Order Flow Auction Example
 
-An order flow source will specify the following parameters, where these parameters will apply for each subsequent epoch of this auction. For a detailed walkthrough of how an auction progresses, head over to this [section](understanding-auction-behavior.md) of the docs.
+An order flow source will specify the following parameters, where these parameters will apply for each subsequent epoch of this auction. Head over to this section for a [detailed walkthrough of an auction process](understanding-auction-behavior.md) of the docs.
 
 | Auction Parameter               | Value              |
 | :------------------------------ | :----------------- |

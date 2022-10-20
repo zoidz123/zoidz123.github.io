@@ -11,7 +11,7 @@ nav:
           - DFlow Node: dflow-node.md
           - Signatory Server: signatory-server.md
           - Endorsement Server: endorsement-server.md
-          - DFlow Native Bridge: bridge.md
+          # - DFlow Native Bridge: bridge.md
       # - "🧰 Use Cases":
       # - OF Marketplace: marketplace.md
       # - 0 Fee Swapping: tsunami.md
@@ -19,8 +19,8 @@ nav:
       - Getting Started: getting-started.md
       - "🌎 General":
           - Understanding Auction Behavior: understanding-auction-behavior.md
-          - Monitoring Auction Events: monitoring-auction-events.md
-          - Depositing / Withdrawing: depositing-withdrawing.md
+          # - Monitoring Auction Events: monitoring-auction-events.md
+          - Depositing / Withdrawing USDC: depositing-withdrawing.md
       - "📤 For Order Flow Sources":
           - Setting Up An Endorsement Server: setting-up-an-endorsement-server.md
           - Creating Auctions: creating-auctions.md
@@ -33,10 +33,9 @@ nav:
           - Filling Order: fill-order.md
   - "📚 Helpful Concepts":
       - Liquidity Models: liquidity-model.md
-      - Crypto Brokerages: crypto-brokerages.md
-      - Payment-for-order-flow: payment-for-order-flow.md
+      - Payment For Order Flow: payment-for-order-flow.md
       - Price Improvement: price-improvement.md
-      - Order Flow Toxicity: order-flow-toxicity.md
+      # - Order Flow Toxicity: order-flow-toxicity.md
 
 theme:
   name: material
