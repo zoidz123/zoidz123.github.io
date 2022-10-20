@@ -1,12 +1,10 @@
 # Crypto Brokerages
 
-## Introduction
-
 In the docs, crypto brokerages is used extensively but loosely to refer to a mix of retail trading venues. In traditional finance, a "stock brokerage" means something very specific and people tend to think of the household names like Robinhood, Interactive Brokers, Charles Schwab, E-Trade etc.
 
 In crypto, a "brokerage" may not elicit the same response due to both the nascency of the entire industry and fundamental differences between a blockchain financial system (e.g. permissionless,...) and the traditional system. For now, wallets like MetaMask and Phantom have the highest potential to become crypto's version of the go-to retail trading venues.
 
-### Breaking Down Crypto Brokerages
+## Breaking Down Crypto Brokerages
 
 An overview of who they are.
 
@@ -16,7 +14,7 @@ Aggregators like 1Inch and Jupiter Aggregator aggregate many liquidity sources t
 
 Portfolio dashboards apps like Zapper and Zerion are like the "frontpages" of crypto and offer convenient swapping venues for users.
 
-### Looking Forward: Finding Alternative Benign Order Flow
+## Looking Forward: Finding Alternative Benign Order Flow
 
 More generally, DFlow is built to provide the best trading experience for benign order flow. In the future, DFlow can support examples including ETF or index fund monthly / quarterly rebalancing, portfolio / vault management strategies (i.e. automatic DCA strategies) etc.
 

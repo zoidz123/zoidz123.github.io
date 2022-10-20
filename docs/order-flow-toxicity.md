@@ -16,7 +16,7 @@ It is important to separate non-toxic from toxic flow because market makers will
 
 ### Measuring Order Flow Toxicity
 
-Order flow toxicity is a well-studied metric that can be measured over time. Intuitively, a market maker can measure the P&L of its order fills immediately after all fills over a long enough time and volume to determine the toxicity of the flow.
+The toxicity of order flow, a proxy for adverse selection risk, can be measured over time, using various types of well-studied mathematical models. Intuitively, a market maker can measure the P&L of its order fills immediately after all fills over a long enough time and volume to determine the toxicity of the flow.
 
 !!! info "Relation to DFlow"
 

@@ -17,9 +17,9 @@ The benefit of an active and market-driven order flow marketplace does not only 
 DFlow is built with the everyday trader in mind. Crypto brokerages selling order flow on DFlow can also unlock the following features:
 
 - [x] Offer 0 fee swapping. No hidden fees. Neither DFlow nor participating market makers take a trading or "convenience" fee.
-- [x] Guaranteed best execution. The DFlow PFOF model uses a decentralized price oracle to ensure market makers fill at the best available market price.
+- [x] Guarantee best execution. The DFlow PFOF model uses a decentralized price oracle to ensure market makers fill at the best available market price.
 - [x] Deliver real cost savings. Market makers often fill at better than market prices, resulting in price and size improvements.
 
-!!! info "Get Started Today"
+<!-- !!! info "Get Started Today"
 
-    If you are a crypto brokerage and is ready to get started with DFlow, check out the [onboarding guides]() or message us directly on Telegram.
+    If you are a crypto brokerage and is ready to get started with DFlow, check out the [onboarding guides]() or message us directly on Telegram. -->

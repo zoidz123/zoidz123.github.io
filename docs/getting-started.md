@@ -19,6 +19,6 @@ After the initial setup, brokerages will primarily use the DFlow interface to cr
 
 Market makers will bid into first-price sealed-bid auctions and after a bid-reveal scheme, the winning market maker will receive the exclusive right to fill the underlying orders of the auction epoch. The bid-reveal scheme is meant to disincentivize market makers from bidding the minimum increment in a bidding war.
 
-!!! info "Get Started"
+<!-- !!! info "Get Started"
 
-    If you are a crypto brokerage interested in onboarding with DFlow or a market maker interested in market making on DFlow, reach out to us on Telegram!
+    If you are a crypto brokerage interested in onboarding with DFlow or a market maker interested in market making on DFlow, reach out to us on Telegram! -->

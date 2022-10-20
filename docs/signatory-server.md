@@ -6,11 +6,11 @@ Every DFlow node or validator must run a signatory server. While the signatory s
 
 ### Fetch Price Quotes
 
-To display prices to users, crypto brokerages will need to request price quotes from the signatory server, which will retrieve the price from the auction winner (i.e. market maker who won the appropriate auction). The signatory server will check if the price request is endorsed and depending on the type of quote request (see [here](fetching-price-quotes.md) for more), it will craft and return a transaction back to the user.
+To display prices to users, crypto brokerages will need to request price quotes from the signatory server, which will retrieve the price from the auction winner (i.e. market maker who won the appropriate auction). The signatory server will check if the price request is endorsed and depending on the type of quote request (DFlow defines [two types of quotes](fetching-price-quotes.md)), it will craft and return a transaction back to the user.
 
 ### Send Transactions
 
-If the user submits the order (i.e. user signs the crafted transaction from signatory server), the signatory server will conduct proper checks and forward the user's signed transaction to the market maker (who won the auction) to be filled.
+If the user submits the order (i.e. user signs the crafted transaction from signatory server), the signatory server will conduct proper checks and forward the user's signed transaction to the market maker (who won the auction) to be filled. The market maker will send a settlement transaction to the appropriate destination (i.e. the chain the order came from).
 
 ### Update DFlow Ledger
 
@@ -19,3 +19,5 @@ As order flow is delivered to auctions, the signatory server notifies the DFlow 
 ### Monitor DFlow Native Bridge
 
 Signatory servers check and validate transactions on both DFlow and Solana to ensure deposits and withdrawals have the correct state changes.
+
+DFlow chose Solana as the chain to be the on-ramp to the DFlow appchain.
