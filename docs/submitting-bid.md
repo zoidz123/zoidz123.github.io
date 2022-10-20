@@ -18,7 +18,7 @@ There is no limit on the number of auctions you can bid into. If you are taking 
 
     Every auction defines its own *maximum* Delivery Period but the *actual* length is based off the `Notional` amount and `Generic Epoch Delivery Period` (or `Genesis Epoch Delivery Period` for the first epoch), whichever comes first.
 
-## A Bidding Example
+<!-- ## A Bidding Example
 
 === "TypeScript"
 
@@ -36,4 +36,4 @@ There is no limit on the number of auctions you can bid into. If you are taking 
 
     ``` rust
     TODO
-    ```
+    ``` -->

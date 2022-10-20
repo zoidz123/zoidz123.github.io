@@ -20,4 +20,4 @@ As order flow is delivered to auctions, the signatory server notifies the DFlow 
 
 Signatory servers check and validate transactions on both DFlow and Solana to ensure deposits and withdrawals have the correct state changes.
 
-DFlow chose Solana as the chain to be the on-ramp to the DFlow appchain.
+DFlow chose Solana as the chain to be the USDC on-ramp to the DFlow appchain.

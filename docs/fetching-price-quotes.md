@@ -10,7 +10,7 @@ DFlow makes it simple for you to display price quotes to your users by exposing 
 
 An Indicative Price Quote is provided by market makers to give a continuous stream of price quotes for you to display to your users. This is a high throughput endpoint that can be called to give users an approximation of the "real" price, where DFlow defines the "real" price as the executable price.
 
-=== "TypeScript"
+<!-- === "TypeScript"
 
     ``` ts
     TODO
@@ -26,7 +26,7 @@ An Indicative Price Quote is provided by market makers to give a continuous stre
 
     ``` http
     TODO
-    ```
+    ``` -->
 
 ## Firm Quote
 
@@ -38,7 +38,7 @@ Note this price quote endpoint is rate-limited which means you should refrain fr
 
 <!-- What's the rate limit? -->
 
-=== "TypeScript"
+<!-- === "TypeScript"
 
     ``` ts
     TODO
@@ -54,4 +54,4 @@ Note this price quote endpoint is rate-limited which means you should refrain fr
 
     ``` http
     TODO
-    ```
+    ``` -->

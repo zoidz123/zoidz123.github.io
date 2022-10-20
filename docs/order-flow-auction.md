@@ -77,7 +77,7 @@ Epochs roll over (i.e. current epoch ends) to the next epoch based on the behavi
 
 !!! info "Why Reveal Period"
 
-    A Reveal Period is needed because DFlow auctions are first-price sealed-bid auctions (also called blind auctions where the entity with the highest bid is the winner), meaning bids are encrypted. Because bids are submitted to DFlow validators and by definition, they will be public in the mempool, there needs to be a Reveal Period.
+    A Reveal Period is needed because DFlow auctions are first-price sealed-bid auctions, meaning bids are encrypted (also referred to as a blind auction with the winner being the highest bid). Because bids are submitted to DFlow validators and by definition, they will be public in the mempool, there needs to be a Reveal Period.
 
 #### Genesis Epoch
 
@@ -127,7 +127,7 @@ Each auction, like a contract, is defined by a set of parameters that determines
 
 #### Network
 
-DFlow is built as a chain agnostic PFOF infrastructure and will support multiple L1 chains. Initially, DFlow will only support order flow from Solana.
+DFlow is built as a chain agnostic PFOF infrastructure and will support multiple L1 chains and rollups.
 
 #### Base and Quote Currency
 
@@ -147,7 +147,7 @@ The `Genesis Epoch Duration` can be set in hours or days and marks the end of th
 
 #### Genesis Epoch Delivery Period
 
-Wallets are allowed to set a `Genesis Epoch Delivery Period` which starts immediately after the `Genesis Epoch Duration` and marks the end of the Delivery period for the first epoch. Sources of order flow must deliver the set `Notional` amount by the end of this period.
+Wallets are allowed to set a `Genesis Epoch Delivery Period` which starts immediately after the `Genesis Epoch Duration` and marks the end of the Delivery period for the first epoch. Sources of order flow must deliver the set `Notional` amount by the end of this period (i.e. this is the maximum delivery period).
 
 #### Generic Delivery Period
 

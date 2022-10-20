@@ -26,11 +26,11 @@ The DFlow Protocol is the suite of on-chain programs, built as a standalone Cosm
 
 ## Why DFlow?
 
-Firstly, the definition of "order flow" should be defined. In crypto, order flow has been used to mean all blockchain transactions, in the context of block builders and proposers on Ethereum. Here, order flow strictly means buy and sell orders at the _application layer_, as opposed to transactions closer to the _validator layer_.
+Firstly, "order flow" should be defined. In crypto, order flow has been used to mean all blockchain transactions, in the context of block builders and proposers on Ethereum. Here, order flow strictly means buy and sell orders at the _application layer_, as opposed to transactions closer to the _validator layer_.
 
 DFlow is built from observing the following existing market needs:
 
-- [x] Decentralization of order flow is necessary because private order flow contributes to centralization of market makers.
+- [x] Decentralization of order flow is necessary because private order flow contributes to centralization of liquidity providers, which will lead to worse execution for retail.
 - [x] Order execution transparency and competition to ensure retail traders receive the best available prices, and be able to verify that.
 - [x] Intense market need for monetization of order flow safely, freely, and with maximum competition.
 
@@ -62,7 +62,7 @@ The benefit of an active and market-driven order flow marketplace does not only 
 
 ### Built For Retail
 
-DFlow is built with the everyday trader in mind. Crypto brokerages selling order flow on DFlow can also unlock the following features:
+DFlow is built with the everyday trader in mind. Crypto brokerages selling order flow on DFlow get the following features:
 
 1. Offer 0 fee swapping. No hidden fees. Neither DFlow nor participating market makers take a trading or "convenience" fee.
 2. Guarantee best execution. The DFlow PFOF model uses a decentralized price oracle to ensure market makers fill at the best available market price.

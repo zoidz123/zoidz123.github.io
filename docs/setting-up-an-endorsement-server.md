@@ -23,7 +23,7 @@ To complete the endorsement server setup, you will need to generate an endorseme
 
 An endorsement server will be delivered to you as a Docker image, which you can deploy on any server. The endorsement server gives you additional flexibility when it comes to preventing malicious actors from using your endorsement key to spam the network.
 
-=== "TypeScript"
+<!-- === "TypeScript"
 
     ``` ts
     TODO
@@ -39,7 +39,7 @@ An endorsement server will be delivered to you as a Docker image, which you can 
 
     ``` rust
     TODO
-    ```
+    ``` -->
 
 After your endorsement server is setup, you can start routing orders to your DFlow auctions!
 
@@ -47,7 +47,7 @@ After your endorsement server is setup, you can start routing orders to your DFl
 
 DFlow requires you to endorse price quote requests and user order transactions. Request and transactions without a proper endorsement will fail. An endorsement also comes with a preset timestamp, limiting actions to a certain period of time after endorsement.
 
-=== "TypeScript"
+<!-- === "TypeScript"
 
     ``` ts
     TODO
@@ -63,4 +63,4 @@ DFlow requires you to endorse price quote requests and user order transactions. 
 
     ``` rust
     TODO
-    ```
+    ``` -->

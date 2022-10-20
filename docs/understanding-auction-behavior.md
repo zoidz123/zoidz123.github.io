@@ -257,8 +257,6 @@ Auction XYZ will roll over indefinitely until it's cancelled.
 
 2.  Having `Time Factor` and `Notional Factor` ensures market makers have sufficient time to reveal bids, ensuring the winner of next epoch is known in advance:
 
-    - E.g. `Epoch N` auction winner is revealed at 70% of `Epoch N-1`'s Delivery Period
-
-3.  Epoch rolls over to next efficiently and deterministically
+3.  Epoch rolls over to next depending on previous epoch
 
     - `Epoch N`'s Delivery Period is based on both `Notional` and a user defined parameter (i.e `Genesis Epoch Delivery Period` or `Generic Epoch Delivery Period`)

@@ -1,6 +1,6 @@
 # Decentralized NBBO
 
-The decentralized NBBO (DNBBO) is an analogue to the NBBO created by the SEC to ensure brokerage firms provide customers with the best publicly available prices. Currently, DFlow uses Pyth as its price source for the DNBBO.
+The decentralized NBBO (DNBBO) is an analogue to the NBBO created by the SEC to ensure brokerage firms provide customers with the best publicly available prices.
 
 !!! info "National Best Bid and Offer (NBBO)"
 

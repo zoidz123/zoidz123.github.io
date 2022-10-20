@@ -2,7 +2,7 @@ site_name: DFlow Documentation
 nav:
   - "🍃 DFlow":
       - Understanding DFlow: index.md
-      - FAQ: faq.md
+      # - FAQ: faq.md
       - "🔍 Core Concepts":
           - Order Flow Auction: order-flow-auction.md
           - Decentralized NBBO: nbbo.md

@@ -10,7 +10,7 @@ If you have the highest bid by the end of the Reveal period, you will become the
 
     The Reveal period lasts until the Delivery Period of the previous epoch ends. Because the Delivery Period of an epoch ends when the `Notional` amount is filled or `Generic Epoch Delivery Period` is up (`Genesis Epoch Delivery Period` for the first epoch), you can monitor `Notional` or `Generic Epoch Delivery Period` to infer the Reveal Period length.
 
-## A Reveal Bid Example
+<!-- ## A Reveal Bid Example
 
 === "TypeScript"
 
@@ -28,4 +28,4 @@ If you have the highest bid by the end of the Reveal period, you will become the
 
     ``` rust
     TODO
-    ```
+    ``` -->

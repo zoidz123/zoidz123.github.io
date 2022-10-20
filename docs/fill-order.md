@@ -4,7 +4,7 @@ If you are the winning market maker of an auction epoch, you will receive the ex
 
 If you choose to not fill the orders, you will forfeit the bid amount and the rest of the orders will be routed to the `Backup Liquidity Provider` specified in the auction.
 
-## A Fill Order Example
+<!-- ## A Fill Order Example
 
 === "TypeScript"
 
@@ -22,4 +22,4 @@ If you choose to not fill the orders, you will forfeit the bid amount and the re
 
     ``` rust
     TODO
-    ```
+    ``` -->
