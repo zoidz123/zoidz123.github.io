@@ -1,4 +1,6 @@
-# Fill Order
+# Fill order
+
+## Learn how to fill orders when you receive order flow
 
 If you are the winning market maker of an auction epoch, you will receive the exclusive right to fill the underlying order flow up to the `Notional` amount or until the end of the `Generic Epoch Delivery Period` (or `Genesis Epoch Delivery Period` for the first epoch).
 

@@ -1,23 +1,23 @@
-# Signatory Server
+# DFlow Signatory Server
 
-Every DFlow node or validator must run a signatory server. While the signatory server, an off-chain program, doesn't handle any order flow auction logic or state, it supports the DFlow Protocol.
+## What is the DFlow Signatory Server
 
-## Main Use Cases
+Every DFlow node or validator must run a Signatory Server. While the Signatory Server, an off-chain program, doesn't handle any order flow auction logic or state, it supports the DFlow Protocol.
 
-### Fetch Price Quotes
+### Fetch price quotes
 
-To display prices to users, crypto brokerages will need to request price quotes from the signatory server, which will retrieve the price from the auction winner (i.e. market maker who won the appropriate auction). The signatory server will check if the price request is endorsed and depending on the type of quote request (DFlow defines [two types of quotes](fetching-price-quotes.md)), it will craft and return a transaction back to the user.
+To display prices to users, crypto brokerages will need to request price quotes from the _signatory server_, which will retrieve the price from the auction winner (i.e. market maker who won the appropriate auction). The Signatory Server will check if the price request is endorsed and depending on the type of quote request (DFlow defines [two types of quotes](fetching-price-quotes.md)), it will craft and return a transaction back to the user.
 
-### Send Transactions
+### Send transactions
 
-If the user submits the order (i.e. user signs the crafted transaction from signatory server), the signatory server will conduct proper checks and forward the user's signed transaction to the market maker (who won the auction) to be filled. The market maker will send a settlement transaction to the appropriate destination (i.e. the chain the order came from).
+If the user submits the order (i.e. user signs the crafted transaction from Signatory Server), the Signatory Server will conduct proper checks and forward the user's signed transaction to the market maker (who won the auction) to be filled. The market maker will send a settlement transaction to the appropriate destination (i.e. the chain the order came from).
 
-### Update DFlow Ledger
+### Update DFlow ledger
 
-As order flow is delivered to auctions, the signatory server notifies the DFlow node to update the delivered notional amount. The delivered notional amount determines the progress of DFlow auctions.
+As order flow is delivered to auctions, the Signatory Server notifies the DFlow node to update the delivered notional amount. The delivered notional amount determines the progress of DFlow auctions.
 
-### Monitor DFlow Native Bridge
+### Monitor DFlow USDC Bridge
 
-Signatory servers check and validate transactions on both DFlow and Solana to ensure deposits and withdrawals have the correct state changes.
+Signatory Server checks and validates transactions on both DFlow and Solana to ensure deposits and withdrawals have the correct state changes.
 
 DFlow chose Solana as the chain to be the USDC on-ramp to the DFlow appchain.

@@ -1,4 +1,6 @@
-# Submitting Bid
+# Submit bid
+
+## Learn how to submit bids into order flow auctions
 
 To win the right to fill order flow of an auction, you have to have the highest bid in the epoch. All DFlow auctions are organized as first-price sealed-bid auctions, meaning you can not see the other existing bids of the epoch during the Bidding Period.
 

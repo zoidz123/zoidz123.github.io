@@ -1,4 +1,6 @@
-# Reveal Bid
+# Reveal bid
+
+## Learn when and how to reveal your bid
 
 DFlow uses first-price sealed-bid auctions so if you submitted a bid into an auction epoch, you will need to reveal your bid to win the epoch. I.e. if you forget to reveal your bid but your bid was the highest bid, you will not win the auction epoch.
 

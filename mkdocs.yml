@@ -1,41 +1,34 @@
 site_name: DFlow Documentation
 nav:
   - "🍃 DFlow":
-      - Understanding DFlow: index.md
-      # - FAQ: faq.md
+      - Introduction to DFlow: index.md
       - "🔍 Core Concepts":
-          - Order Flow Auction: order-flow-auction.md
+          - Order flow auction: order-flow-auction.md
           - Decentralized NBBO: nbbo.md
-          - Flow Price: flow-price.md
+          - Flow price: flow-price.md
       - "📐 Protocol Architecture":
           - DFlow Node: dflow-node.md
-          - Signatory Server: signatory-server.md
-          - Endorsement Server: endorsement-server.md
-          # - DFlow Native Bridge: bridge.md
-      # - "🧰 Use Cases":
-      # - OF Marketplace: marketplace.md
-      # - 0 Fee Swapping: tsunami.md
+          - DFlow Signatory Server: signatory-server.md
+          - DFlow Endorsement Server: endorsement-server.md
   - "🛠️ Guides":
-      - Getting Started: getting-started.md
+      - Getting started: getting-started.md
       - "🌎 General":
-          - Understanding Auction Behavior: understanding-auction-behavior.md
-          # - Monitoring Auction Events: monitoring-auction-events.md
-          - Depositing / Withdrawing USDC: depositing-withdrawing.md
+          - DFlow auction behavior: understanding-auction-behavior.md
+          - Transfer USDC: depositing-withdrawing.md
       - "📤 For Order Flow Sources":
-          - Setting Up An Endorsement Server: setting-up-an-endorsement-server.md
-          - Creating Auctions: creating-auctions.md
-          - Fetching Price Quotes: fetching-price-quotes.md
-          - Sending Order Transaction: sending-order-transaction.md
-          - Routing Order Flow: routing-order-flow.md
+          - Set up a DFlow Endorsement Server: setting-up-an-endorsement-server.md
+          - Create auction: creating-auctions.md
+          - Fetch price quote: fetching-price-quotes.md
+          - Send order transaction: sending-order-transaction.md
+          - Route order: routing-order-flow.md
       - "💸 For Market Makers":
-          - Submitting Bid: submitting-bid.md
-          - Revealing Bid: reveal-bid.md
-          - Filling Order: fill-order.md
+          - Submit bid: submitting-bid.md
+          - Reveal bid: reveal-bid.md
+          - Fill order: fill-order.md
   - "📚 Helpful Concepts":
       - Liquidity Models: liquidity-model.md
-      - Payment For Order Flow: payment-for-order-flow.md
+      - Payment-for-order-flow: payment-for-order-flow.md
       - Price Improvement: price-improvement.md
-      # - Order Flow Toxicity: order-flow-toxicity.md
 
 theme:
   name: material
