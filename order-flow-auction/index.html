@@ -1,0 +1,1441 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../logo/dflow-favicon.png">
+      <meta name="generator" content="mkdocs-1.4.1, mkdocs-material-8.5.6">
+    
+    
+      
+        <title>Order flow auction - DFlow Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.20d9efc8.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Open Sans";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#order-flow-auction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="DFlow Documentation" class="md-header__button md-logo" aria-label="DFlow Documentation" data-md-component="logo">
+      
+  <img src="../logo/dflow-logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            DFlow Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Order flow auction
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link md-tabs__link--active">
+        🍃 DFlow
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../getting-started/" class="md-tabs__link">
+        🛠️ Guides
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../liquidity-model/" class="md-tabs__link">
+        📚 Helpful Concepts
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="DFlow Documentation" class="md-nav__button md-logo" aria-label="DFlow Documentation" data-md-component="logo">
+      
+  <img src="../logo/dflow-logo.png" alt="logo">
+
+    </a>
+    DFlow Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          🍃 DFlow
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="🍃 DFlow" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          🍃 DFlow
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Introduction to DFlow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2" type="checkbox" id="__nav_1_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_2">
+          🔍 Core Concepts
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="🔍 Core Concepts" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          🔍 Core Concepts
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Order flow auction
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Order flow auction
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-an-order-flow-auction" class="md-nav__link">
+    What is an order flow auction
+  </a>
+  
+    <nav class="md-nav" aria-label="What is an order flow auction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#advantages-over-the-traditional-pfof-model" class="md-nav__link">
+    Advantages over the traditional PFOF model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#structure-of-an-auction" class="md-nav__link">
+    Structure of an auction
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rationale-behind-the-structure" class="md-nav__link">
+    Rationale behind the structure
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#overview-of-auction-parameters" class="md-nav__link">
+    Overview of auction parameters
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview of auction parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#network" class="md-nav__link">
+    Network
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#base-and-quote-currency" class="md-nav__link">
+    Base and Quote Currency
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notional" class="md-nav__link">
+    Notional
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#min-and-max-range" class="md-nav__link">
+    Min and Max Range
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#genesis-epoch-duration" class="md-nav__link">
+    Genesis Epoch Duration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#genesis-epoch-delivery-period" class="md-nav__link">
+    Genesis Epoch Delivery Period
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generic-delivery-period" class="md-nav__link">
+    Generic Delivery Period
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fee-payer" class="md-nav__link">
+    Fee Payer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backup-liquidity-provider" class="md-nav__link">
+    Backup Liquidity Provider
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#an-order-flow-auction-example" class="md-nav__link">
+    An order flow auction example
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#overview-of-the-rollover-process" class="md-nav__link">
+    Overview of the rollover process
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview of the rollover process">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#defining-the-genesis-epoch" class="md-nav__link">
+    Defining the Genesis Epoch
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#defining-the-generic-epoch" class="md-nav__link">
+    Defining the Generic Epoch
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nbbo/" class="md-nav__link">
+        Decentralized NBBO
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../flow-price/" class="md-nav__link">
+        Flow price
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_1_3" type="checkbox" id="__nav_1_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_3">
+          📐 Protocol Architecture
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="📐 Protocol Architecture" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_3">
+          <span class="md-nav__icon md-icon"></span>
+          📐 Protocol Architecture
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dflow-node/" class="md-nav__link">
+        DFlow Node
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../signatory-server/" class="md-nav__link">
+        DFlow Signatory Server
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../endorsement-server/" class="md-nav__link">
+        DFlow Endorsement Server
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          🛠️ Guides
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="🛠️ Guides" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          🛠️ Guides
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/" class="md-nav__link">
+        Getting started
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2">
+          🌎 General
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="🌎 General" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          🌎 General
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../understanding-auction-behavior/" class="md-nav__link">
+        DFlow auction behavior
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../depositing-withdrawing/" class="md-nav__link">
+        Transfer USDC
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3">
+          📤 For Order Flow Sources
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="📤 For Order Flow Sources" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          📤 For Order Flow Sources
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setting-up-an-endorsement-server/" class="md-nav__link">
+        Set up a DFlow Endorsement Server
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../creating-auctions/" class="md-nav__link">
+        Create auction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fetching-price-quotes/" class="md-nav__link">
+        Fetch price quote
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sending-order-transaction/" class="md-nav__link">
+        Send order transaction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../routing-order-flow/" class="md-nav__link">
+        Route order
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_2_4" type="checkbox" id="__nav_2_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4">
+          💸 For Market Makers
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="💸 For Market Makers" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          💸 For Market Makers
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../submitting-bid/" class="md-nav__link">
+        Submit bid
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reveal-bid/" class="md-nav__link">
+        Reveal bid
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fill-order/" class="md-nav__link">
+        Fill order
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          📚 Helpful Concepts
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="📚 Helpful Concepts" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          📚 Helpful Concepts
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../liquidity-model/" class="md-nav__link">
+        Liquidity Models
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../payment-for-order-flow/" class="md-nav__link">
+        Payment-for-order-flow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../price-improvement/" class="md-nav__link">
+        Price Improvement
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-an-order-flow-auction" class="md-nav__link">
+    What is an order flow auction
+  </a>
+  
+    <nav class="md-nav" aria-label="What is an order flow auction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#advantages-over-the-traditional-pfof-model" class="md-nav__link">
+    Advantages over the traditional PFOF model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#structure-of-an-auction" class="md-nav__link">
+    Structure of an auction
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rationale-behind-the-structure" class="md-nav__link">
+    Rationale behind the structure
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#overview-of-auction-parameters" class="md-nav__link">
+    Overview of auction parameters
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview of auction parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#network" class="md-nav__link">
+    Network
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#base-and-quote-currency" class="md-nav__link">
+    Base and Quote Currency
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notional" class="md-nav__link">
+    Notional
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#min-and-max-range" class="md-nav__link">
+    Min and Max Range
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#genesis-epoch-duration" class="md-nav__link">
+    Genesis Epoch Duration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#genesis-epoch-delivery-period" class="md-nav__link">
+    Genesis Epoch Delivery Period
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generic-delivery-period" class="md-nav__link">
+    Generic Delivery Period
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fee-payer" class="md-nav__link">
+    Fee Payer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backup-liquidity-provider" class="md-nav__link">
+    Backup Liquidity Provider
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#an-order-flow-auction-example" class="md-nav__link">
+    An order flow auction example
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#overview-of-the-rollover-process" class="md-nav__link">
+    Overview of the rollover process
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview of the rollover process">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#defining-the-genesis-epoch" class="md-nav__link">
+    Defining the Genesis Epoch
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#defining-the-generic-epoch" class="md-nav__link">
+    Defining the Generic Epoch
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="order-flow-auction">Order flow auction</h1>
+<h2 id="what-is-an-order-flow-auction">What is an order flow auction</h2>
+<p>The DFlow order flow auction is core to DFlow and is fundamental to understanding DFlow's open and fair PFOF model. On DFlow, order flow is tranched and batched into auctions created by brokerages. Market makers then bid on auctions to receive the right to fill the underlying order flow.</p>
+<h3 id="advantages-over-the-traditional-pfof-model">Advantages over the traditional PFOF model</h3>
+<p>DFlow reinvents the PFOF model by introducing transparency and fairness to the PFOF model seen in the traditional stock market. Traditionally, order flow is sold using long-term contracts with opaque terms between brokerages and market makers.</p>
+<p>By conducting PFOF on the blockchain, DFlow allows participants to clearly see the entire trade lifecycle including order flow batching, bidding, and filling. Furthermore, a decentralized PFOF model allows any market maker to participate in bidding, which results in better price for users and more competitive payments for crypto brokerages.</p>
+<h3 id="structure-of-an-auction">Structure of an auction</h3>
+<p>DFlow use first-price sealed-bid auctions that run in a parallel, sequential manner. Crypto brokerages can run multiple auctions at the same time, where each auction has a set of predetermined specs that identify the underlying order flow.</p>
+<p>Each auction is automatically sold repeatedly where an epoch number is incremented to identify the vintage of a specific auction. The auction only requires a one-time setup and will last as long as it's not canceled.</p>
+<pre class="mermaid"><code>erDiagram
+    WALLET-A ||--|| AUCTION-A : creates
+    WALLET-A ||--|| AUCTION-B : creates
+    WALLET-A ||--|| AUCTION-C : creates
+    AUCTION-A {
+        string baseCurrency
+        string quoteCurrency
+        int minimumOrderSize
+        int maximumOrderSize
+        int notionalSize
+        int genesisEpochDuration
+        int genesisEpochDeliveryPeriod
+        int genericEpochDeliveryPeriod
+        string feePayer
+        string backupLiquidityProvider
+    }
+    AUCTION-B {
+        string baseCurrency
+        string quoteCurrency
+        int minimumOrderSize
+        int maximumOrderSize
+        int notionalSize
+        int genesisEpochDuration
+        int genesisEpochDeliveryPeriod
+        int genericEpochDeliveryPeriod
+        string feePayer
+        string backupLiquidityProvider
+    }
+    AUCTION-C {
+        string baseCurrency
+        string quoteCurrency
+        int minimumOrderSize
+        int maximumOrderSize
+        int notionalSize
+        int genesisEpochDuration
+        int genesisEpochDeliveryPeriod
+        int genericEpochDeliveryPeriod
+        string feePayer
+        string backupLiquidityProvider
+    }</code></pre>
+<h3 id="rationale-behind-the-structure">Rationale behind the structure</h3>
+<p>As a result of this PFOF model, market makers bid in auctions to fill future batches of order flow, eliminating the speculation that market makers can see order details before paying for order flow. Market makers price auctions based on the predetermined specs and external factors like where these order flow came from.</p>
+<p>A sequential auction model is chosen to enable continuous bidding and delivery of order flow.</p>
+<h3 id="overview-of-auction-parameters">Overview of auction parameters</h3>
+<p>Each auction, like a contract, is defined by a set of parameters that determines the quality and grade of the underlying. Order flow sources should understand each parameter before creating auctions.</p>
+<h4 id="network">Network</h4>
+<p>DFlow is built as a chain agnostic PFOF infrastructure and <em>Network</em> defines the chain where order flow is coming from.</p>
+<h4 id="base-and-quote-currency">Base and Quote Currency</h4>
+<p>Each auction contains only one token pair. E.g. an auction will have WETH–USDC as the underlying token asset, where WETH is the <em>Base Currency</em> and USDC is the <em>Quote Currency</em>.</p>
+<h4 id="notional">Notional</h4>
+<p><em>Notional</em> specifies the amount, in USD, of order flow per epoch in the auction. E.g. $100,000 is the value per epoch.</p>
+<h4 id="min-and-max-range">Min and Max Range</h4>
+<p>An auction lets users define the <em>Min</em> and <em>Max</em>, both in USD, of the underlying token pair of the auction, where Min is inclusive and Max is exclusive. Orders following this range will be routed to the auction by the wallet or swapper.</p>
+<h4 id="genesis-epoch-duration">Genesis Epoch Duration</h4>
+<p>The <em>Genesis Epoch Duration</em> can be set in hours or days and marks the end of the Bid + Reveal period of the first epoch, also known as the Genesis Epoch (or Epoch 0). Auctions are structured to run sequentially so note the end of this period also marks the beginning of the second epoch, or Epoch 1.</p>
+<h4 id="genesis-epoch-delivery-period">Genesis Epoch Delivery Period</h4>
+<p>Wallets are allowed to set a <em>Genesis Epoch Delivery Period</em> which starts immediately after the Genesis Epoch Duration and marks the end of the Delivery period for the first epoch. Sources of order flow must deliver the set Notional amount by the end of this period (i.e. this is the maximum delivery period).</p>
+<h4 id="generic-delivery-period">Generic Delivery Period</h4>
+<p>The <em>Generic Delivery Period</em> applies to all epochs after the first and determines the maximum delivery period of an epoch. As a reminder, an epoch moves on to the next when either its Delivery period ends or Notinal amount is reached, the one that comes first.</p>
+<h4 id="fee-payer">Fee Payer</h4>
+<p>Auction owners can choose who pays, either the market maker or their users, for the L1 settlement transaction. This option is only available on low gas cost chains as it is not feasible for market makers to cover gas fees on chains like Ethereum during high usage periods.</p>
+<h4 id="backup-liquidity-provider">Backup Liquidity Provider</h4>
+<p>As the name infers, the <em>Backup Liquidity Provider</em> is used as a backup when a market maker is not filling orders. For example, a winning market maker goes offline and does not respond to fill requests, or the winning market fills 80% of incoming orders and chooses to route remaining orders to the Backup LP. We will support various liquidity providers including 0x, 1Inch, Jupiter Aggregator etc.</p>
+<h3 id="an-order-flow-auction-example">An order flow auction example</h3>
+<p>An order flow source will specify the following parameters, where these parameters will apply for each subsequent epoch of this auction.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Auction Parameter</th>
+<th align="left">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Network</td>
+<td align="left">Solana</td>
+</tr>
+<tr>
+<td align="left">Base Currency</td>
+<td align="left">SOL</td>
+</tr>
+<tr>
+<td align="left">Quote Currency</td>
+<td align="left">USDC</td>
+</tr>
+<tr>
+<td align="left">Min</td>
+<td align="left">$20</td>
+</tr>
+<tr>
+<td align="left">Max</td>
+<td align="left">$50</td>
+</tr>
+<tr>
+<td align="left">Notional</td>
+<td align="left">$200,000</td>
+</tr>
+<tr>
+<td align="left">Genesis Epoch Duration</td>
+<td align="left">10 days</td>
+</tr>
+<tr>
+<td align="left">Genesis Epoch Delivery Period</td>
+<td align="left">5 days</td>
+</tr>
+<tr>
+<td align="left">Generic Epoch Delivery Period</td>
+<td align="left">10 minutes</td>
+</tr>
+<tr>
+<td align="left">Fee Payer</td>
+<td align="left">Market Maker</td>
+</tr>
+<tr>
+<td align="left">Backup Liquidity Provider</td>
+<td align="left">Jupiter Aggregator</td>
+</tr>
+</tbody>
+</table>
+<h3 id="overview-of-the-rollover-process">Overview of the rollover process</h3>
+<p>An auction is comprised of an indefinite number of epochs. As mentioned above, an epoch defines the vintage or "age" of the auction. All epochs follow the same lifecycle and the epoch's length is the sum of:</p>
+<ul>
+<li><em>Bid Period</em>: Market makers <em>bid</em> into auction</li>
+<li><em>Reveal Period</em>: Market makers <em>reveal</em> bids</li>
+<li><em>Delivery Period</em>: Order flow sources <em>deliver</em> order flow</li>
+</ul>
+<p>An epoch moves to the next epoch based on the behavior of the previous epoch, to ensure a continuous auction bid and delivery process. For more information, see <a href="../understanding-auction-behavior/">DFlow auction behavior</a>.</p>
+<div class="admonition info">
+<p class="admonition-title">Why Reveal Period</p>
+<p>A Reveal Period is needed because DFlow auctions are first-price sealed-bid auctions, meaning bids are encrypted. Because bids are submitted to DFlow validators and by definition, they will be public in the mempool, there needs to be a Reveal Period.</p>
+</div>
+<h4 id="defining-the-genesis-epoch">Defining the Genesis Epoch</h4>
+<p><em>Genesis Epoch</em> is the first epoch of an auction. Auction owners define the Bid and Reveal period of this epoch by setting the Genesis Epoch Duration. They can also define the Delivery period by setting the Genesis Epoch Delivery Period. The reason behind a different treatment for the Genesis Epoch is to let auction owners prepare for the auction like ensuring their system is properly set up, promoting their auction (i.e. on social media), establishing credibility etc.</p>
+<pre class="mermaid"><code>gantt
+    dateFormat  MM-DD
+    axisFormat  %m-%d
+    todayMarker off
+    Current Time: milestone, 10-13, 12h
+
+    section Genesis
+    Bid Period                  :active,  des1, 10-13, 3d
+    Reveal Period               :crit,  des2, after des1, 3d
+    Delivery Period             :crit,  des3, after des2, 3d</code></pre>
+<h4 id="defining-the-generic-epoch">Defining the Generic Epoch</h4>
+<p>All epochs, excluding the first epoch, are classified as <em>Generic Epoch</em>. Generic Epoch Bid and Reveal periods are no longer user-defined and will depend on the previous epoch's Delivery Period. In this case, a new epoch starts when the Delivery period of the previous epoch starts and this epoch ends when its Delivery period ends.</p>
+<pre class="mermaid"><code>gantt
+    dateFormat  MM-DD
+    axisFormat  %m-%d
+    todayMarker off
+    Current Time: milestone, 10-20, 12h
+
+    section Genesis
+    Bid Period                  :done,  des1, 10-13, 3d
+    Reveal Period               :done,  des2, after des1, 3d
+    Delivery Period             :active,  des3, after des2, 3d
+
+
+    section Generic
+    Bid Period                  :active,  des4, after des2, 2d
+    Reveal Period               :crit,  des5, after des4, 1d
+    Delivery Period             :crit,  des6, after des5, 2d</code></pre>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Introduction to DFlow" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Introduction to DFlow
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../nbbo/" class="md-footer__link md-footer__link--next" aria-label="Next: Decentralized NBBO" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Decentralized NBBO
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2022 DFlow Inc.
+    </div>
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/DFlowProtocol" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "content.code.annotate", "content.tabs.link"], "search": "../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.078830c0.min.js"></script>
+      
+    
+  </body>
+</html>
