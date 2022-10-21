@@ -1,6 +1,6 @@
 # DFlow Signatory Server
 
-## What is the DFlow Signatory Server
+## What is a DFlow Signatory Server
 
 Every DFlow node or validator must run a Signatory Server. While the Signatory Server, an off-chain program, doesn't handle any order flow auction logic or state, it supports the DFlow Protocol.
 
